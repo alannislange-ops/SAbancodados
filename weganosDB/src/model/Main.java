@@ -30,7 +30,6 @@ public class Main {
             System.out.println("          SISTEMA DE GESTAO - WEG            ");
             System.out.println("=============================================");
             System.out.println("1 -> Cadastrar Cliente");
-            System.out.println("11 -> Mostrar clientes");
             System.out.println("2 -> Cadastrar Transportadora");
             System.out.println("3 -> Cadastrar Fornecedor");
             System.out.println("4 -> Cadastrar Categoria");
@@ -40,19 +39,21 @@ public class Main {
             System.out.println("8 -> Registrar Pagamento");
             System.out.println("9 -> Registrar Avaliacao de Produto");
             System.out.println("10 -> Relatorio Geral (Listar tudo da memoria)");
+            System.out.println("11 -> Mostrar clientes");
             System.out.println("0 -> Sair do Sistema");
             System.out.print("Escolha uma opcao: ");
 
             int opcao = lerNumeroInteiro(teclado);
 
             switch (opcao) {
+
                 case 1:
                     System.out.println("\n--- [ NOVO CLIENTE ] ---");
-                    
-                    Cliente cliente = new Cliente(0,null,null,null,null,null,null,null,null);
+
+                    Cliente cliente = new Cliente(0, null, null, null, null, null, null, null, null);
 
                     System.out.print("Nome: ");
-                    cliente.setNome(teclado.nextLine()); 
+                    cliente.setNome(teclado.nextLine());
 
                     System.out.print("CPF (11 digitos): ");
                     cliente.setCpf(teclado.nextLine());
@@ -74,20 +75,12 @@ public class Main {
 
                     System.out.print("Numero da Casa: ");
                     cliente.setNcasa(teclado.nextLine());
-                    
 
                     ClienteDAO clienteDAO = new ClienteDAO();
                     clienteDAO.salvar(cliente);
                     System.out.println("Sucesso: Cliente cadastrado no banco de dados.");
                     break;
 
-                case 11:
-                    for(Cliente c : listaClientes){
-                        System.out.println("");
-                        c.mostrarCliente();
-                    }
-                    
-                    break;
                 case 2:
                     System.out.println("\n--- [ NOVA TRANSPORTADORA ] ---");
                     Transportadora transportadora = new Transportadora();
@@ -246,6 +239,15 @@ public class Main {
                     System.out.println("Total de Pagamentos: " + listaPagamentos.size());
                     System.out.println("Total de Avaliacoes: " + listaAvaliacoes.size());
                     break;
+                    
+                case 11:
+
+                    for (Cliente c : listaClientes) {
+                        c.mostrarCliente();
+                    }
+
+                    break;
+
                 case 0:
                     System.out.println("\nFinalizando o programa.");
                     rodando = false;
@@ -255,7 +257,7 @@ public class Main {
                     break;
             }
         }
-        
+
     }
 
     private static int lerNumeroInteiro(Scanner sc) {

@@ -2,12 +2,10 @@ package dao;
 
 import model.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import conexao.Conexao;
 
@@ -47,7 +45,6 @@ public class ClienteDAO {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
 
-                System.out.print((rs.getInt("id_cliente")));
                 cliente.setId(rs.getInt("id_cliente"));
                 cliente.setNome(rs.getString("nome_cliente"));
                 cliente.setCpf(rs.getString("documento_cliente"));
@@ -97,7 +94,23 @@ public class ClienteDAO {
 
     public void deletar(Cliente cliente) {
 
-    }
+        String sql = "DELETE FROM CLIENTE WHERE id_cliente = ?";
 
-    
+        try (Connection conn = Conexao.getConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, cliente.getId());
+
+            int linhasAfetadas = stmt.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                System.out.println("Sucesso: Cliente deletado com sucesso!");
+            } else {
+                System.out.println("Aviso: Nenhum cliente encontrado com o ID informado.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao deletar cliente: " + e.getMessage());
+        }
+    }
 }

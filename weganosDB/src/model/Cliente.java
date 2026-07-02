@@ -26,7 +26,9 @@ public class Cliente {
         this.ncasa = ncasa;
     }
     public void mostrarCliente(){
-        System.out.println(id + " "+nome+ " "+cpf);
+        System.out.println("=======================================");
+        System.out.println("ID: "+id + "\nNome: "+nome+ "\nCpf: "+cpf+"\nEmail: "+email+"\nTelefone: "+telefone+"\nCEP: "+cep+"\nCidade: "+cidade+"\nRua: "+rua+"\nNúmero da casa: "+ncasa);
+        System.out.println("=======================================");
     }
 
     public int getId() {
