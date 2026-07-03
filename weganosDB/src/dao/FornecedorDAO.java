@@ -65,7 +65,6 @@ public class FornecedorDAO {
             stmt.setString(2, fornecedor.getCnpjFornecedor());
             stmt.setString(3, fornecedor.getTelefoneFornecedor());
 
-            // O ID vai no WHERE usando o getter correspondente
             stmt.setInt(4, fornecedor.getIdFornecedor());
 
             stmt.executeUpdate();

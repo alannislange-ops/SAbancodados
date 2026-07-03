@@ -27,7 +27,7 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
-        //listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        // listaAvaliacoes = AvaliacaoDAO.listarTodos();
         // listaFornecedores = FornecedorDAO.listarTodos();
         // listaCategorias = CategoriaDAO.listarTodos();
         // listaProdutos = ProdutoDAO.listarTodos();
@@ -35,7 +35,6 @@ public class Main {
         // listaCarrinhos = CarrinhoContemDAO.listarTodos();
         // listaPagamentos = Pagamento.listarTodos();
         listaLogin = LoginDAO.listarTodos();
-
 
         while (rodando) {
             System.out.println("\n=============================================");
@@ -269,7 +268,7 @@ public class Main {
                             System.out.println("\n--- [ NOVO FORNECEDOR ] ---");
 
                             Fornecedor fornecedor = new Fornecedor();
-        
+
                             System.out.print("Nome da Empresa: ");
                             fornecedor.setNomeFornecedor(teclado.nextLine());
                             System.out.print("CNPJ: ");
@@ -311,7 +310,7 @@ public class Main {
                             System.out.println("\n--- [ NOVA CATEGORIA ] ---");
 
                             Categoria categoria = new Categoria();
-                            
+
                             System.out.print("Nome da Categoria: ");
                             categoria.setNomeCategoria(teclado.nextLine());
                             System.out.print("Descricao: ");
@@ -560,7 +559,7 @@ public class Main {
                         case 1:
                             System.out.println("\n--- [ NOVO LOGIN ] ---");
 
-                            Login login = new Login(0,null,null);
+                            Login login = new Login(0, null, null);
 
                             System.out.println("Digite o nome da conta: ");
                             login.setNome_login(teclado.next());
@@ -593,7 +592,7 @@ public class Main {
                             Alogin.setNome_login(teclado.nextLine());
                             System.out.print("Nova senha: ");
                             Alogin.setSenha_login(teclado.nextLine());
-                            
+
                             LoginDAO daoLogin = new LoginDAO();
 
                             daoLogin.alterar(Alogin);

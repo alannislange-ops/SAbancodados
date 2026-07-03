@@ -1,10 +1,10 @@
 package model;
 
 public class Fornecedor {
-    private int idFornecedor;
-    private String nomeFornecedor;
-    private String cnpjFornecedor;
-    private String telefoneFornecedor;
+    public int idFornecedor;
+    public String nomeFornecedor;
+    public String cnpjFornecedor;
+    public String telefoneFornecedor;
 
     public Fornecedor() {
 
