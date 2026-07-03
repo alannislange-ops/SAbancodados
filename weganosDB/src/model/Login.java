@@ -32,7 +32,7 @@ public class Login {
 
     public void mostrarLogin(){
         System.out.println("=======================================");
-        System.out.println("ID: "+id_login+"\nNome da conta: "+nome_login+"Senha: "+senha_login);
+        System.out.println("ID: "+id_login+"\nNome da conta: "+nome_login+"\nSenha: "+senha_login);
         System.out.println("=======================================");
     }
     

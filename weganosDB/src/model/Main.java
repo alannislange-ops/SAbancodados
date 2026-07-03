@@ -27,6 +27,15 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
+        //listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        // listaFornecedores = FornecedorDAO.listarTodos();
+        // listaCategorias = CategoriaDAO.listarTodos();
+        // listaProdutos = ProdutoDAO.listarTodos();
+        // listaPedidos = PedidoDAO.listarTodos();
+        // listaCarrinhos = CarrinhoContemDAO.listarTodos();
+        // listaPagamentos = Pagamento.listarTodos();
+        listaLogin = LoginDAO.listarTodos();
+
 
         while (rodando) {
             System.out.println("\n=============================================");
@@ -97,7 +106,7 @@ public class Main {
                             for (Cliente c : listaClientes) {
                                 c.mostrarCliente();
                             }
-                        
+
                             break;
                         case 3:
                             System.out.println("\n--- [ ALTERAR CLIENTE ] ---");
@@ -134,14 +143,14 @@ public class Main {
                             System.out.println("\n--- [ DELETAR CLIENTE ] ---");
 
                             Cliente clienteParaDeletar = new Cliente();
-                                
+
                             System.out.print("Digite o ID do cliente que deseja EXCLUIR: ");
                             clienteParaDeletar.setId(teclado.nextInt());
                             teclado.nextLine();
-                                
+
                             ClienteDAO daoDeletar = new ClienteDAO();
                             daoDeletar.deletar(clienteParaDeletar);
-                                
+
                             break;
                         case 0:
                             break;
@@ -149,7 +158,8 @@ public class Main {
                             System.out.println("Aviso: Opcao incorreta. Escolha um numero listado.");
                             break;
                     }
-                    break;case 2:
+                    break;
+                case 2:
 
                     System.out.println("\n=============================================");
                     System.out.println("                TRANSPORTADORA               ");
@@ -166,7 +176,7 @@ public class Main {
                         case 1:
                             System.out.println("\n--- [ NOVA TRANSPORTADORA ] ---");
 
-                            Transportadora transportadora = new Transportadora(0,null, null, null, null, null);
+                            Transportadora transportadora = new Transportadora(0, null, null, null, null, null);
 
                             System.out.print("Nome da Empresa: ");
                             transportadora.nomeTransportadora = teclado.nextLine();
@@ -180,6 +190,7 @@ public class Main {
                             transportadora.cnpjTransportadora = teclado.nextLine();
                             System.out.print("Valor de Contratacao Mensal: R$ ");
                             transportadora.contratacaoMensalTran = lerPreco(teclado);
+
                             TransportadoraDAO transportadoraDAO = new TransportadoraDAO();
 
                             transportadoraDAO.salvar(transportadora);
@@ -194,7 +205,7 @@ public class Main {
                             for (Transportadora t : listaTransportadoras) {
                                 t.mostrarTransportadora();
                             }
-                        
+
                             break;
                         case 3:
                             System.out.println("\n--- [ ALTERAR TRANSPORTADORA ] ---");
@@ -240,7 +251,7 @@ public class Main {
                             break;
                     }
                     break;
-case 3:
+                case 3:
 
                     System.out.println("\n=============================================");
                     System.out.println("                  FORNECEDOR                 ");
@@ -319,7 +330,7 @@ case 3:
                             break;
                     }
                     break;
-                    
+
                 case 5:
 
                     System.out.println("\n=============================================");
@@ -368,7 +379,7 @@ case 3:
                             break;
                     }
                     break;
-case 6:
+                case 6:
 
                     System.out.println("\n=============================================");
                     System.out.println("                    PEDIDO                   ");
@@ -406,7 +417,7 @@ case 6:
                             break;
                     }
                     break;
-                    
+
                 case 7:
 
                     System.out.println("\n=============================================");
@@ -447,7 +458,7 @@ case 6:
                             break;
                     }
                     break;
-                    
+
                 case 8:
 
                     System.out.println("\n=============================================");
@@ -490,7 +501,7 @@ case 6:
                             break;
                     }
                     break;
-case 9:
+                case 9:
 
                     System.out.println("\n=============================================");
                     System.out.println("                  AVALIAÇÃO                  ");
@@ -548,16 +559,58 @@ case 9:
                         case 1:
                             System.out.println("\n--- [ NOVO LOGIN ] ---");
 
-                            Login login = new Login();
+                            Login login = new Login(0,null,null);
 
+                            System.out.println("Digite o nome da conta: ");
+                            login.setNome_login(teclado.next());
+                            System.out.println("Digite a senha: ");
+                            login.setSenha_login(teclado.next());
+
+                            LoginDAO loginDAO = new LoginDAO();
+
+                            loginDAO.salvar(login);
                             listaLogin.add(login);
                             System.out.println("Sucesso: Login adicionado a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE LOGIN ] ---");
+
+                            listaLogin = LoginDAO.listarTodos();
+                            for (Login l : listaLogin) {
+                                l.mostrarLogin();
+                            }
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR LOGIN ] ---");
+
+                            Login Alogin = new Login();
+
+                            System.out.print("Digite o ID do login que deseja alterar: ");
+                            Alogin.setId_login(teclado.nextInt());
+                            teclado.nextLine();
+                            System.out.print("Novo Nome: ");
+                            Alogin.setNome_login(teclado.nextLine());
+                            System.out.print("Nova senha: ");
+                            Alogin.setSenha_login(teclado.nextLine());
+                            
+                            LoginDAO daoLogin = new LoginDAO();
+
+                            daoLogin.alterar(Alogin);
+                            listaClientes = ClienteDAO.listarTodos();
+
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR LOGIN ] ---");
+
+                            Login Dlogin = new Login();
+
+                            System.out.print("Digite o ID do login que deseja EXCLUIR: ");
+                            Dlogin.setId_login(teclado.nextInt());
+                            teclado.nextLine();
+
+                            LoginDAO daoLoginD = new LoginDAO();
+                            daoLoginD.deletar(Dlogin);
+
                             break;
                         case 0:
                             break;
@@ -572,7 +625,8 @@ case 9:
                     }
                     System.out.println("Total de Transportadoras: " + listaTransportadoras.size());
                     for (Transportadora t : listaTransportadoras) {
-                        System.out.println(" - ID: " + t.getIdTransportadora() + " | Nome: " + t.getNomeTransportadora());
+                        System.out
+                                .println(" - ID: " + t.getIdTransportadora() + " | Nome: " + t.getNomeTransportadora());
                     }
                     System.out.println("Total de Fornecedores: " + listaFornecedores.size());
                     System.out.println("Total de Categorias: " + listaCategorias.size());
