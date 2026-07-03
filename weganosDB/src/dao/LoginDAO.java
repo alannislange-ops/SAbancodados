@@ -54,7 +54,7 @@ public class LoginDAO {
     }
 
     public void alterar(Login login) {
-        String sql = "UPDATE LOGIN SET nome_login = ?, senha_login = ? WHERE id_login = ?";
+        String sql = "UPDATE LOGIN SET nome_usuario = ?, senha_login = ? WHERE id_login = ?";
 
         try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

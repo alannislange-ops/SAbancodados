@@ -2,8 +2,8 @@ package model;
 
 import java.math.BigDecimal;
 class CarrinhoContem {
-    public int quantidadeProdutosCo;
-    public BigDecimal valorCompra;
-    public int fkPedidoIdPedido; 
-    public int fkProdutoIdProduto; 
+    private int quantidadeProdutosCo;
+    private BigDecimal valorCompra;
+    private int fkPedidoIdPedido; 
+    private int fkProdutoIdProduto; 
 }

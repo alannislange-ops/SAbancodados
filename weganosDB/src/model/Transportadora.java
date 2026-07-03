@@ -4,12 +4,12 @@ import java.time.LocalTime;
 import java.math.BigDecimal;
 public class Transportadora {
 
-    public int idTransportadora;
-    public String nomeTransportadora;
-    public LocalTime horarioAberturaTranspo;
-    public LocalTime horarioFechamentoTran;
-    public String cnpjTransportadora;
-    public BigDecimal contratacaoMensalTran;
+    private int idTransportadora;
+    private String nomeTransportadora;
+    private LocalTime horarioAberturaTranspo;
+    private LocalTime horarioFechamentoTran;
+    private String cnpjTransportadora;
+    private BigDecimal contratacaoMensalTran;
 
     public Transportadora(){
         

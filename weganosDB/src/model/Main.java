@@ -478,7 +478,7 @@ public class Main {
 
                             Pagamento pagamento = new Pagamento();
                             System.out.print("ID do Pagamento: ");
-                            pagamento.idPagamento = lerNumeroInteiro(teclado);
+                            pagamento.setidPagamento = lerNumeroInteiro(teclado);
                             System.out.print("Forma de Pagamento: ");
                             pagamento.formaPagamento = teclado.nextLine();
                             System.out.print("Status do Pagamento: ");
