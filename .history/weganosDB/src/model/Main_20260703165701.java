@@ -549,6 +549,7 @@ case 9:
                             System.out.println("\n--- [ NOVO LOGIN ] ---");
 
                             Login login = new Login();
+                            
 
                             listaLogin.add(login);
                             System.out.println("Sucesso: Login adicionado a lista.");

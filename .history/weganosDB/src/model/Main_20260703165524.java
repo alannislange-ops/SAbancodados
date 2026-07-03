@@ -23,7 +23,7 @@ public class Main {
         ArrayList<CarrinhoContem> listaCarrinhos = new ArrayList<>();
         ArrayList<Pagamento> listaPagamentos = new ArrayList<>();
         ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
-        ArrayList<Login> listaLogin = new ArrayList<>();
+        ArrayL
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
@@ -548,10 +548,18 @@ case 9:
                         case 1:
                             System.out.println("\n--- [ NOVO LOGIN ] ---");
 
-                            Login login = new Login();
+                            Avaliacao avaliacao = new Avaliacao();
+                            System.out.print("ID da Avaliacao: ");
+                            avaliacao.idAvaliacao = lerNumeroInteiro(teclado);
+                            System.out.print("Nota da Avaliacao (1 a 5): ");
+                            avaliacao.notaAvaliacao = lerNumeroInteiro(teclado);
+                            System.out.print("Texto da Avaliacao: ");
+                            avaliacao.descAvaliacao = teclado.nextLine();
+                            System.out.print("ID do Produto: ");
+                            avaliacao.fkProdutoIdProduto = lerNumeroInteiro(teclado);
 
-                            listaLogin.add(login);
-                            System.out.println("Sucesso: Login adicionado a lista.");
+                            listaAvaliacoes.add(avaliacao);
+                            System.out.println("Sucesso: Avaliacao adicionada a lista.");
                             break;
                         case 2:
                             break;

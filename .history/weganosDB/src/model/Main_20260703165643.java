@@ -549,9 +549,16 @@ case 9:
                             System.out.println("\n--- [ NOVO LOGIN ] ---");
 
                             Login login = new Login();
+                            
+                            System.out.print("Nota da Avaliacao (1 a 5): ");
+                            avaliacao.notaAvaliacao = lerNumeroInteiro(teclado);
+                            System.out.print("Texto da Avaliacao: ");
+                            avaliacao.descAvaliacao = teclado.nextLine();
+                            System.out.print("ID do Produto: ");
+                            avaliacao.fkProdutoIdProduto = lerNumeroInteiro(teclado);
 
                             listaLogin.add(login);
-                            System.out.println("Sucesso: Login adicionado a lista.");
+                            System.out.println("Sucesso: Avaliacao adicionada a lista.");
                             break;
                         case 2:
                             break;

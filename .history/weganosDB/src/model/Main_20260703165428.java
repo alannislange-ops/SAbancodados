@@ -23,7 +23,6 @@ public class Main {
         ArrayList<CarrinhoContem> listaCarrinhos = new ArrayList<>();
         ArrayList<Pagamento> listaPagamentos = new ArrayList<>();
         ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
-        ArrayList<Login> listaLogin = new ArrayList<>();
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
@@ -541,27 +540,7 @@ case 9:
                     System.out.println("3 -> Update login");
                     System.out.println("4 -> Delete login");
                     System.out.println("0 -> Voltar");
-
-                    opcao2 = lerNumeroInteiro(teclado);
-
-                    switch (opcao2) {
-                        case 1:
-                            System.out.println("\n--- [ NOVO LOGIN ] ---");
-
-                            Login login = new Login();
-
-                            listaLogin.add(login);
-                            System.out.println("Sucesso: Login adicionado a lista.");
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 0:
-                            break;
-                    }
+                    
                     break;
                 case 11:
 

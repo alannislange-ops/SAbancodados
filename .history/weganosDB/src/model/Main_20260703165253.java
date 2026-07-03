@@ -23,7 +23,6 @@ public class Main {
         ArrayList<CarrinhoContem> listaCarrinhos = new ArrayList<>();
         ArrayList<Pagamento> listaPagamentos = new ArrayList<>();
         ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
-        ArrayList<Login> listaLogin = new ArrayList<>();
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
@@ -41,8 +40,7 @@ public class Main {
             System.out.println("7 -> Compra ao carrinho");
             System.out.println("8 -> Pagamento");
             System.out.println("9 -> Avaliação");
-            System.out.println("10 -> Login");
-            System.out.println("11 -> Relatorio Geral (Listar tudo da memoria)");
+            System.out.println("10 -> Relatorio Geral (Listar tudo da memoria)");
             System.out.println("0 -> Sair do Sistema");
             System.out.print("Escolha uma opcao: ");
 
@@ -532,38 +530,6 @@ case 9:
                     break;
 
                 case 10:
-
-                    System.out.println("\n=============================================");
-                    System.out.println("                  LOGIN                  ");
-                    System.out.println("=============================================");
-                    System.out.println("1 -> Create login");
-                    System.out.println("2 -> Read login");
-                    System.out.println("3 -> Update login");
-                    System.out.println("4 -> Delete login");
-                    System.out.println("0 -> Voltar");
-
-                    opcao2 = lerNumeroInteiro(teclado);
-
-                    switch (opcao2) {
-                        case 1:
-                            System.out.println("\n--- [ NOVO LOGIN ] ---");
-
-                            Login login = new Login();
-
-                            listaLogin.add(login);
-                            System.out.println("Sucesso: Login adicionado a lista.");
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 0:
-                            break;
-                    }
-                    break;
-                case 11:
 
                     System.out.println("\n--- [ LISTAGEM DE DADOS ARMAZENADOS ] ---");
                     System.out.println("Total de Clientes: " + listaClientes.size());
