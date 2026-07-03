@@ -24,22 +24,28 @@ public class Main {
         ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<>();
 
         listaClientes = ClienteDAO.listarTodos();
+        listaTransportadoras = TransportadoraDAO.listarTodos();
 
         while (rodando) {
             System.out.println("\n=============================================");
             System.out.println("          SISTEMA DE GESTAO - WEG            ");
             System.out.println("=============================================");
-            System.out.println("1 -> Cadastrar Cliente");
-            System.out.println("2 -> Cadastrar Transportadora");
-            System.out.println("3 -> Cadastrar Fornecedor");
-            System.out.println("4 -> Cadastrar Categoria");
-            System.out.println("5 -> Cadastrar Produto");
-            System.out.println("6 -> Criar Pedido");
-            System.out.println("7 -> Adicionar Produto ao Carrinho (Item Pedido)");
-            System.out.println("8 -> Registrar Pagamento");
-            System.out.println("9 -> Registrar Avaliacao de Produto");
-            System.out.println("10 -> Relatorio Geral (Listar tudo da memoria)");
-            System.out.println("11 -> Mostrar clientes");
+            System.out.println("1 -> Create Cliente");
+            System.out.println("2 -> Read clientes");
+            System.out.println("3 -> Update cliente");
+            System.out.println("4 -> Delete cliente");
+            System.out.println("5 -> Create Transportadora");
+            System.out.println("6 -> Read Transportadora");
+            System.out.println("7 -> Update Transportadora");
+            System.out.println("8 -> Delete Transportadora");
+            System.out.println("9 -> Cadastrar Fornecedor");
+            System.out.println("10 -> Cadastrar Categoria");
+            System.out.println("11 -> Cadastrar Produto");
+            System.out.println("12 -> Criar Pedido");
+            System.out.println("13 -> Adicionar Produto ao Carrinho (Item Pedido)");
+            System.out.println("14 -> Registrar Pagamento");
+            System.out.println("15 -> Registrar Avaliacao de Produto");
+            System.out.println("16 -> Relatorio Geral (Listar tudo da memoria)");
             System.out.println("0 -> Sair do Sistema");
             System.out.print("Escolha uma opcao: ");
 
@@ -80,30 +86,148 @@ public class Main {
                     clienteDAO.salvar(cliente);
                     System.out.println("Sucesso: Cliente cadastrado no banco de dados.");
                     break;
-
                 case 2:
-                    System.out.println("\n--- [ NOVA TRANSPORTADORA ] ---");
-                    Transportadora transportadora = new Transportadora();
-                    System.out.print("ID da Transportadora: ");
-                    transportadora.idTransportadora = lerNumeroInteiro(teclado);
-                    System.out.print("Nome da Empresa: ");
-                    transportadora.nomeTransportadora = teclado.nextLine();
-                    System.out.print("Hora de Abertura (ex: 08): ");
-                    int horaAb = lerNumeroInteiro(teclado);
-                    transportadora.horarioAberturaTranspo = LocalTime.of(horaAb, 0);
-                    System.out.print("Hora de Fechamento (ex: 18): ");
-                    int horaFe = lerNumeroInteiro(teclado);
-                    transportadora.horarioFechamentoTran = LocalTime.of(horaFe, 0);
-                    System.out.print("CNPJ: ");
-                    transportadora.cnpjTransportadora = teclado.nextLine();
-                    System.out.print("Valor de Contratacao Mensal: R$ ");
-                    transportadora.contratacaoMensalTran = lerPreco(teclado);
 
-                    listaTransportadoras.add(transportadora);
-                    System.out.println("Sucesso: Transportadora adicionada a lista.");
+                    listaClientes = ClienteDAO.listarTodos();
+                    for (Cliente c : listaClientes) {
+                        c.mostrarCliente();
+                    }
+
                     break;
 
                 case 3:
+                    System.out.println("\n--- [ ALTERAR CLIENTE ] ---");
+
+                    Cliente clienteParaAlterar = new Cliente();
+
+                    System.out.print("Digite o ID do cliente que deseja alterar: ");
+                    clienteParaAlterar.setId(teclado.nextInt());
+                    teclado.nextLine();
+
+                    System.out.print("Novo Nome: ");
+                    clienteParaAlterar.setNome(teclado.nextLine());
+
+                    System.out.print("Novo CPF: ");
+                    clienteParaAlterar.setCpf(teclado.nextLine());
+
+                    System.out.print("Novo Email: ");
+                    clienteParaAlterar.setEmail(teclado.nextLine());
+
+                    System.out.print("Novo Telefone: ");
+                    clienteParaAlterar.setTelefone(teclado.nextLine());
+
+                    System.out.print("Novo CEP: ");
+                    clienteParaAlterar.setCep(teclado.nextLine());
+
+                    System.out.print("Nova Cidade: ");
+                    clienteParaAlterar.setCidade(teclado.nextLine());
+
+                    System.out.print("Nova Rua: ");
+                    clienteParaAlterar.setRua(teclado.nextLine());
+
+                    System.out.print("Novo Numero da Casa: ");
+                    clienteParaAlterar.setNcasa(teclado.nextLine());
+
+                    ClienteDAO daoAlterar = new ClienteDAO();
+                    daoAlterar.alterar(clienteParaAlterar);
+                    listaClientes = ClienteDAO.listarTodos();
+
+                    break;
+
+                case 4:
+                    System.out.println("\n--- [ DELETAR CLIENTE ] ---");
+
+                    Cliente clienteParaDeletar = new Cliente();
+
+                    System.out.print("Digite o ID do cliente que deseja EXCLUIR: ");
+                    clienteParaDeletar.setId(teclado.nextInt());
+                    teclado.nextLine();
+
+                    ClienteDAO daoDeletar = new ClienteDAO();
+                    daoDeletar.deletar(clienteParaDeletar);
+
+                    break;
+
+                case 5:
+                    System.out.println("\n--- [ NOVA TRANSPORTADORA ] ---");
+
+                    Transportadora transportadora = new Transportadora();
+
+                    System.out.print("Nome da Empresa: ");
+                    transportadora.nomeTransportadora = teclado.nextLine();
+
+                    System.out.print("Hora de Abertura (ex: 08): ");
+                    int horaAb = lerNumeroInteiro(teclado);
+
+                    transportadora.horarioAberturaTranspo = LocalTime.of(horaAb, 0);
+                    System.out.print("Hora de Fechamento (ex: 18): ");
+
+                    int horaFe = lerNumeroInteiro(teclado);
+                    transportadora.horarioFechamentoTran = LocalTime.of(horaFe, 0);
+
+                    System.out.print("CNPJ: ");
+                    transportadora.cnpjTransportadora = teclado.nextLine();
+
+                    System.out.print("Valor de Contratacao Mensal: R$ ");
+                    transportadora.contratacaoMensalTran = lerPreco(teclado);
+
+                    TransportadoraDAO transportadoraDAO = new TransportadoraDAO();
+                    transportadoraDAO.salvar(transportadora);
+                    System.out.println("Sucesso: Transportadora adicionada a lista.");
+                    break;
+
+                case 6:
+                    System.out.println("\n--- [ LISTA DE TRANSPORTADORAS ] ---");
+
+                    listaTransportadoras = TransportadoraDAO.listarTodos();
+
+                    for (Transportadora t : listaTransportadoras) {
+                        t.mostrarTransportadora();
+                    }
+
+                    break;
+                case 7:
+                    System.out.println("\n--- [ ALTERAR TRANSPORTADORA ] ---");
+
+                    Transportadora transpoAlterar = new Transportadora();
+
+                    System.out.print("Digite o ID da Transportadora que deseja alterar: ");
+                    transpoAlterar.setIdTransportadora(lerNumeroInteiro(teclado));
+
+                    System.out.print("Novo Nome da Empresa: ");
+                    transpoAlterar.setNomeTransportadora(teclado.nextLine());
+
+                    System.out.print("Nova Hora de Abertura (ex: 08): ");
+                    int novaHoraAb = lerNumeroInteiro(teclado);
+                    transpoAlterar.setHorarioAberturaTranspo(LocalTime.of(novaHoraAb, 0));
+
+                    System.out.print("Nova Hora de Fechamento (ex: 18): ");
+                    int novaHoraFe = lerNumeroInteiro(teclado);
+                    transpoAlterar.setHorarioFechamentoTran(LocalTime.of(novaHoraFe, 0));
+
+                    System.out.print("Novo CNPJ: ");
+                    transpoAlterar.setCnpjTransportadora(teclado.nextLine());
+
+                    System.out.print("Novo Valor de Contratação Mensal: R$ ");
+                    transpoAlterar.setContratacaoMensalTran(lerPreco(teclado));
+
+                    TransportadoraDAO dao = new TransportadoraDAO();
+                    dao.alterar(transpoAlterar);
+
+                    break;
+                case 8:
+                    System.out.println("\n--- [ DELETAR TRANSPORTADORA ] ---");
+
+                    Transportadora transpoDeletar = new Transportadora();
+
+                    System.out.print("Digite o ID da Transportadora que deseja EXCLUIR: ");
+                    transpoDeletar.setIdTransportadora(lerNumeroInteiro(teclado));
+
+                    TransportadoraDAO tDeletar = new TransportadoraDAO();
+                    tDeletar.deletar(transpoDeletar);
+
+                    break;
+                case 9:
                     System.out.println("\n--- [ NOVO FORNECEDOR ] ---");
                     Fornecedor fornecedor = new Fornecedor();
                     System.out.print("ID do Fornecedor: ");
@@ -120,7 +244,7 @@ public class Main {
                     System.out.println("Sucesso: Fornecedor adicionado a lista.");
                     break;
 
-                case 4:
+                case 10:
                     System.out.println("\n--- [ NOVA CATEGORIA ] ---");
                     Categoria categoria = new Categoria();
                     System.out.print("ID da Categoria: ");
@@ -134,7 +258,7 @@ public class Main {
                     System.out.println("Sucesso: Categoria adicionada a lista.");
                     break;
 
-                case 5:
+                case 11:
                     System.out.println("\n--- [ NOVO PRODUTO ] ---");
                     Produto produto = new Produto();
                     System.out.print("Nome do Produto: ");
@@ -159,7 +283,7 @@ public class Main {
                     System.out.println("Sucesso: Produto adicionado a lista.");
                     break;
 
-                case 6:
+                case 12:
                     System.out.println("\n--- [ NOVO PEDIDO ] ---");
                     Pedido pedido = new Pedido();
                     System.out.print("ID do Pedido: ");
@@ -174,7 +298,7 @@ public class Main {
                     System.out.println("Sucesso: Pedido adicionado a lista.");
                     break;
 
-                case 7:
+                case 13:
                     System.out.println("\n--- [ ADICIONAR AO CARRINHO ] ---");
                     CarrinhoContem carrinho = new CarrinhoContem();
                     System.out.print("ID do Pedido: ");
@@ -190,7 +314,7 @@ public class Main {
                     System.out.println("Sucesso: Item associado ao carrinho.");
                     break;
 
-                case 8:
+                case 14:
                     System.out.println("\n--- [ REGISTRAR PAGAMENTO ] ---");
                     Pagamento pagamento = new Pagamento();
                     System.out.print("ID do Pagamento: ");
@@ -206,7 +330,7 @@ public class Main {
                     listaPagamentos.add(pagamento);
                     System.out.println("Sucesso: Pagamento adicionado a lista.");
                     break;
-                case 9:
+                case 15:
                     System.out.println("\n--- [ NOVA AVALIACAO ] ---");
                     Avaliacao avaliacao = new Avaliacao();
                     System.out.print("ID da Avaliacao: ");
@@ -220,13 +344,16 @@ public class Main {
                     listaAvaliacoes.add(avaliacao);
                     System.out.println("Sucesso: Avaliacao adicionada a lista.");
                     break;
-                case 10:
+                case 16:
                     System.out.println("\n--- [ LISTAGEM DE DADOS ARMAZENADOS ] ---");
                     System.out.println("Total de Clientes: " + listaClientes.size());
                     for (Cliente c : listaClientes) {
                         System.out.println(" - ID: " + c.getId() + " | Nome: " + c.getNome());
                     }
                     System.out.println("Total de Transportadoras: " + listaTransportadoras.size());
+                    for (Transportadora t : listaTransportadoras) {
+                        System.out.println(" - ID: " + t.getIdTransportadora() + " | Nome: " + t.getNomeTransportadora());
+                    }
                     System.out.println("Total de Fornecedores: " + listaFornecedores.size());
                     System.out.println("Total de Categorias: " + listaCategorias.size());
                     System.out.println("Total de Produtos: " + listaProdutos.size());
@@ -238,14 +365,6 @@ public class Main {
                     System.out.println("Total de Itens de Carrinho: " + listaCarrinhos.size());
                     System.out.println("Total de Pagamentos: " + listaPagamentos.size());
                     System.out.println("Total de Avaliacoes: " + listaAvaliacoes.size());
-                    break;
-                    
-                case 11:
-
-                    for (Cliente c : listaClientes) {
-                        c.mostrarCliente();
-                    }
-
                     break;
 
                 case 0:
