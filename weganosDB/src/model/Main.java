@@ -151,7 +151,7 @@ public class Main {
                 case 5:
                     System.out.println("\n--- [ NOVA TRANSPORTADORA ] ---");
 
-                    Transportadora transportadora = new Transportadora();
+                    Transportadora transportadora = new Transportadora(0,null, null, null, null, null);
 
                     System.out.print("Nome da Empresa: ");
                     transportadora.nomeTransportadora = teclado.nextLine();

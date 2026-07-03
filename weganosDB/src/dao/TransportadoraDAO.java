@@ -13,7 +13,7 @@ import conexao.Conexao;
 public class TransportadoraDAO {
     
     public void salvar(Transportadora transportadora) {
-        String sql = "INSERT INTO TRANSPORTADORA (nome_transportadora, horario_abertura_tran, horario_fechamento_tran, cnpj_transportadora, contratacao_mensal_tran) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TRANSPORTADORA (nome_transportadora, horario_abertura_tran, horario_fechamento_tran, cnpj_transportadora, contratacao_mensal_tran) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -24,7 +24,6 @@ public class TransportadoraDAO {
             stmt.setString(4, transportadora.getCnpjTransportadora());
             stmt.setBigDecimal(5, transportadora.getContratacaoMensalTran());
 
-            stmt.setInt(6, transportadora.getIdTransportadora());
 
             stmt.executeUpdate();
             System.out.println("Sucesso: Transportadora salva no banco de dados!");
@@ -64,7 +63,7 @@ public class TransportadoraDAO {
     }
 
     public void alterar(Transportadora transportadora) {
-        String sql = "UPDATE TRANSPORTADORA SET nomeTransportadora = ?, horario_abertura_tran = ?, horario_fechamento_tran = ?, cnpj_transportadora = ?, contratacao_mensal_tran = ? WHERE id_transportadora = ?";
+        String sql = "UPDATE TRANSPORTADORA SET nome_transportadora = ?, horario_abertura_tran = ?, horario_fechamento_tran = ?, cnpj_transportadora = ?, contratacao_mensal_tran = ? WHERE id_transportadora = ?";
 
         try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
