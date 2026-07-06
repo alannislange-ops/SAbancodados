@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conexao.Conexao;
-import model.*;
+import model.Categoria;
+import model.Fornecedor;
+import model.Produto;
 
 public class ProdutoDAO {
 

@@ -27,7 +27,7 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
-        listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        //listaAvaliacoes = AvaliacaoDAO.listarTodos();
         listaFornecedores = FornecedorDAO.listarTodos();
         listaCategorias = CategoriaDAO.listarTodos();
         listaProdutos = ProdutoDAO.listarTodos();
