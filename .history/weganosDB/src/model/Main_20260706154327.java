@@ -27,10 +27,10 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
-        //listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        listaAvaliacoes = AvaliacaoDAO.listarTodos();
         listaFornecedores = FornecedorDAO.listarTodos();
         listaCategorias = CategoriaDAO.listarTodos();
-        //listaProdutos = ProdutoDAO.listarTodos();
+        listaProdutos = ProdutoDAO.listarTodos();
         listaPedidos = PedidoDAO.listarTodos();
         listaCarrinhos = CarrinhoContemDAO.listarTodos();
         listaPagamentos = PagamentosDAO.listarTodos();
@@ -45,9 +45,10 @@ public class Main {
         Vlogin.setSenha_login(teclado.nextLine());
 
         LoginDAO VdaoLogin = new LoginDAO();
+
         boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
 
-        try (loginSucesso) {
+        if (loginSucesso) {
             System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
         } else {
             System.out.println("\nNome ou senha incorretos.");
@@ -416,9 +417,9 @@ public class Main {
                             //produto.valorVendaProduto = lerPreco(teclado);
 
                             System.out.print("ID do Fornecedor vinculado: ");
-                            //produto.fkFornecedorIdFornecedor = lerNumeroInteiro(teclado);
+                            produto.fkFornecedorIdFornecedor = lerNumeroInteiro(teclado);
                             System.out.print("ID da Categoria vinculada: ");
-                            //produto.fkCategoriaIdCategoria = lerNumeroInteiro(teclado);
+                            produto.fkCategoriaIdCategoria = lerNumeroInteiro(teclado);
 
                             listaProdutos.add(produto);
                             System.out.println("Sucesso: Produto adicionado a lista.");

@@ -73,7 +73,7 @@ public class LoginDAO {
     }
 
     public boolean verificar(String nome, String senha) {
-    String sql = "SELECT * FROM LOGIN WHERE nome_usuario = ? AND senha_login = SHA2( ?, 256 )";
+    String sql = "SELECT * FROM LOGIN WHERE nome = ? AND senha = SHA2(?, 26)";
     
     try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

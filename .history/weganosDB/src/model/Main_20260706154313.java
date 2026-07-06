@@ -27,10 +27,10 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
-        //listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        listaAvaliacoes = AvaliacaoDAO.listarTodos();
         listaFornecedores = FornecedorDAO.listarTodos();
         listaCategorias = CategoriaDAO.listarTodos();
-        //listaProdutos = ProdutoDAO.listarTodos();
+        listaProdutos = ProdutoDAO.listarTodos();
         listaPedidos = PedidoDAO.listarTodos();
         listaCarrinhos = CarrinhoContemDAO.listarTodos();
         listaPagamentos = PagamentosDAO.listarTodos();
@@ -45,9 +45,10 @@ public class Main {
         Vlogin.setSenha_login(teclado.nextLine());
 
         LoginDAO VdaoLogin = new LoginDAO();
+
         boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
 
-        try (loginSucesso) {
+        if (loginSucesso) {
             System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
         } else {
             System.out.println("\nNome ou senha incorretos.");
@@ -403,22 +404,22 @@ public class Main {
                             Produto produto = new Produto();
 
                             System.out.print("Nome do Produto: ");
-                            //produto.nomeProduto = teclado.nextLine();
+                            produto.nomeProduto = teclado.nextLine();
                             System.out.print("Preco Base: R$ ");
-                            //produto.precoProduto = lerPreco(teclado);
+                            produto.precoProduto = lerPreco(teclado);
                             System.out.print("Quantidade em Estoque: ");
-                            //produto.qtdEstoqueProduto = lerNumeroInteiro(teclado);
+                            produto.qtdEstoqueProduto = lerNumeroInteiro(teclado);
                             System.out.print("Descricao: ");
-                            //produto.descProduto = teclado.nextLine();
+                            produto.descProduto = teclado.nextLine();
                             System.out.print("Valor de Compra: R$ ");
-                            //produto.valorCompraProduto = lerPreco(teclado);
+                            produto.valorCompraProduto = lerPreco(teclado);
                             System.out.print("Valor de Venda: R$ ");
-                            //produto.valorVendaProduto = lerPreco(teclado);
+                            produto.valorVendaProduto = lerPreco(teclado);
 
                             System.out.print("ID do Fornecedor vinculado: ");
-                            //produto.fkFornecedorIdFornecedor = lerNumeroInteiro(teclado);
+                            produto.fkFornecedorIdFornecedor = lerNumeroInteiro(teclado);
                             System.out.print("ID da Categoria vinculada: ");
-                            //produto.fkCategoriaIdCategoria = lerNumeroInteiro(teclado);
+                            produto.fkCategoriaIdCategoria = lerNumeroInteiro(teclado);
 
                             listaProdutos.add(produto);
                             System.out.println("Sucesso: Produto adicionado a lista.");
@@ -612,7 +613,7 @@ public class Main {
                             Avaliacao avaliacao = new Avaliacao();
 
                             System.out.print("Nota da Avaliacao (1 a 5): ");
-                            //avaliacao.setNotaAvaliacao(lerNumeroInteiro(teclado));
+                            avaliacao.setNotaAvaliacao(lerNumeroInteiro(teclado));
                             System.out.print("Texto da Avaliacao: ");
                             //avaliacao.setDescAvaliacao(teclado.nextLine());
                             System.out.print("ID do Produto: ");

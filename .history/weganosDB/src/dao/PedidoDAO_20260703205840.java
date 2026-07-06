@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 import conexao.Conexao;
@@ -37,7 +38,7 @@ public class PedidoDAO {
     }
 
 
-    public static ArrayList<Pedido> listarTodos() {
+    public static ArrayList<Pedido> listar() {
         String sql = "SELECT * FROM PEDIDO";
         ArrayList<Pedido> lista = new ArrayList<>();
 

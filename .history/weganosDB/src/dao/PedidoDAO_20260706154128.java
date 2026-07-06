@@ -37,7 +37,7 @@ public class PedidoDAO {
     }
 
 
-    public static ArrayList<Pedido> listarTodos() {
+    public static ArrayList<Pedido> listar() {
         String sql = "SELECT * FROM PEDIDO";
         ArrayList<Pedido> lista = new ArrayList<>();
 

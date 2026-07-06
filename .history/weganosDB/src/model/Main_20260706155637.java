@@ -49,7 +49,7 @@ public class Main {
 
         try (loginSucesso) {
             System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
-        } else {
+        } c {
             System.out.println("\nNome ou senha incorretos.");
         }
 

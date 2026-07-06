@@ -40,7 +40,7 @@ public class CarrinhoContemDAO {
 
 
     public static ArrayList<CarrinhoContem> listarTodos() {
-        String sql = "SELECT * FROM CARRINHO_CONTEM";
+        String sql = "SELECT * FROM CARRINHO_COTEM";
         ArrayList<CarrinhoContem> lista = new ArrayList<>();
 
 
