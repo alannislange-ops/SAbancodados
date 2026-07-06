@@ -67,6 +67,8 @@ public class AvaliacaoDAO {
             stmt.setString(2, avaliacao.getDescAvaliacao());
             stmt.setInt(3, avaliacao.getFkProdutoIdProduto().getIdProduto());
 
+            stmt.setInt(4, avaliacao.getIdAvaliacao());
+            
             stmt.executeUpdate();
             System.out.println("Avaliação atualizado com sucesso no banco!");
 
