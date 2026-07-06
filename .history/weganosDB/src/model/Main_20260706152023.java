@@ -37,22 +37,31 @@ public class Main {
         listaLogin = LoginDAO.listarTodos();
 
         System.out.println("\n--- [ VERIFICAR LOGIN ] ---");
-        Login Vlogin = new Login();
+Login Vlogin = new Login();
 
-        System.out.print("Nome: ");
-        Vlogin.setNome_login(teclado.nextLine());
-        System.out.print("Senha: ");
-        Vlogin.setSenha_login(teclado.nextLine());
+// 1. Coleta os dados do usuário (Boa sacada usar o teclado.nextLine() depois do nextInt!)
+System.out.print("Digite o ID do login: ");
+Vlogin.setId_login(teclado.nextInt());
+teclado.nextLine(); 
 
-        LoginDAO VdaoLogin = new LoginDAO();
+System.out.print("Nome: ");
+Vlogin.setNome_login(teclado.nextLine());
 
-        boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
+System.out.print("Senha: ");
+Vlogin.setSenha_login(teclado.nextLine());
 
-        if (loginSucesso) {
-            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
-        } else {
-            System.out.println("\nNome ou senha incorretos.");
-        }
+// 2. Instancia o DAO
+LoginDAO VdaoLogin = new LoginDAO();
+
+// 3. Chama o método de AUTENTICAR (em vez de alterar)
+boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
+
+// 4. Diz ao usuário se deu certo ou não
+if (loginSucesso) {
+    System.out.println("\n✅ Login realizado com sucesso! Bem-vindo.");
+} else {
+    System.out.println("\n❌ Nome ou senha incorretos.");
+}
 
         while (rodando) {
             System.out.println("\n=============================================");

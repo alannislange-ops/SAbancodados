@@ -37,22 +37,20 @@ public class Main {
         listaLogin = LoginDAO.listarTodos();
 
         System.out.println("\n--- [ VERIFICAR LOGIN ] ---");
+
         Login Vlogin = new Login();
 
+        System.out.print("Digite o ID do login: ");
+        Vlogin.setId_login(teclado.nextInt());
+        teclado.nextLine();
         System.out.print("Nome: ");
         Vlogin.setNome_login(teclado.nextLine());
-        System.out.print("Senha: ");
+        System.out.print("Nova senha: ");
         Vlogin.setSenha_login(teclado.nextLine());
 
         LoginDAO VdaoLogin = new LoginDAO();
 
-        boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
-
-        if (loginSucesso) {
-            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
-        } else {
-            System.out.println("\nNome ou senha incorretos.");
-        }
+        VdaoLogin.alterar(Vlogin);
 
         while (rodando) {
             System.out.println("\n=============================================");

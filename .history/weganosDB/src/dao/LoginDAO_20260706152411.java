@@ -75,13 +75,15 @@ public class LoginDAO {
     public boolean verificar(String nome, String senha) {
     String sql = "SELECT * FROM LOGIN WHERE nome = ? AND senha = ?";
     
-    try (Connection conn = Conexao.getConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
         
+        // 1. Define os valores dos parâmetros '?'
         stmt.setString(1, nome);
         stmt.setString(2, senha);
         
+        // 2. Executa a busca e guarda o resultado
         try (ResultSet rs = stmt.executeQuery()) {
+            // 3. Retorna verdadeiro se encontrar um registro válido
             return rs.next(); 
         }
         

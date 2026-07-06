@@ -10,7 +10,6 @@ class Produto {
     private BigDecimal valorVendaProduto;
     private int fkFornecedorIdFornecedor;
     private int fkCategoriaIdCategoria;
-    
     public void mostrarProduto(){
         System.out.println("=======================================");
         System.out.println("ID: "+idProduto + "\nNome: "+nomeProduto);

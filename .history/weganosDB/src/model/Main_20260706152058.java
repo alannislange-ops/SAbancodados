@@ -48,10 +48,11 @@ public class Main {
 
         boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
 
+        // 4. Diz ao usuário se deu certo ou não
         if (loginSucesso) {
-            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
+            System.out.println("\n✅ Login realizado com sucesso! Bem-vindo.");
         } else {
-            System.out.println("\nNome ou senha incorretos.");
+            System.out.println("\n❌ Nome ou senha incorretos.");
         }
 
         while (rodando) {

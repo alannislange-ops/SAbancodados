@@ -44,14 +44,17 @@ public class Main {
         System.out.print("Senha: ");
         Vlogin.setSenha_login(teclado.nextLine());
 
+        // 2. Instancia o DAO
         LoginDAO VdaoLogin = new LoginDAO();
 
+        // 3. Chama o método de AUTENTICAR (em vez de alterar)
         boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
 
+        // 4. Diz ao usuário se deu certo ou não
         if (loginSucesso) {
-            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
+            System.out.println("\n✅ Login realizado com sucesso! Bem-vindo.");
         } else {
-            System.out.println("\nNome ou senha incorretos.");
+            System.out.println("\n❌ Nome ou senha incorretos.");
         }
 
         while (rodando) {

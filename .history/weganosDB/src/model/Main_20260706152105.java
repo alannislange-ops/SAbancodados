@@ -51,7 +51,7 @@ public class Main {
         if (loginSucesso) {
             System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
         } else {
-            System.out.println("\nNome ou senha incorretos.");
+            System.out.println("\n❌ Nome ou senha incorretos.");
         }
 
         while (rodando) {

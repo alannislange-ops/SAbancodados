@@ -72,25 +72,13 @@ public class LoginDAO {
         }
     }
 
-    public boolean verificar(String nome, String senha) {
-    String sql = "SELECT * FROM LOGIN WHERE nome = ? AND senha = ?";
-    
-    try (Connection conn = Conexao.getConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public class UsuarioDAO {
+    public boolean autenticar(String nome, String senha) {
+        String sql = "SELECT id FROM usuarios WHERE nome = ? AND senha = ?";
         
-        stmt.setString(1, nome);
-        stmt.setString(2, senha);
-        
-        try (ResultSet rs = stmt.executeQuery()) {
-            return rs.next(); 
-        }
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
+        return resultSet.next(); 
     }
 }
-
 
     public void deletar(Login login) {
 

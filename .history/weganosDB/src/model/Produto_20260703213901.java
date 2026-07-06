@@ -11,11 +11,6 @@ class Produto {
     private int fkFornecedorIdFornecedor;
     private int fkCategoriaIdCategoria;
     
-    public void mostrarProduto(){
-        System.out.println("=======================================");
-        System.out.println("ID: "+idProduto + "\nNome: "+nomeProduto);
-        System.out.println("=======================================");
-    }
     public int getIdProduto() {
         return idProduto;
     }

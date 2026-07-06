@@ -37,22 +37,21 @@ public class Main {
         listaLogin = LoginDAO.listarTodos();
 
         System.out.println("\n--- [ VERIFICAR LOGIN ] ---");
+
         Login Vlogin = new Login();
 
-        System.out.print("Nome: ");
-        Vlogin.setNome_login(teclado.nextLine());
-        System.out.print("Senha: ");
-        Vlogin.setSenha_login(teclado.nextLine());
+        System.out.print("Digite o ID do login que deseja alterar: ");
+        Vlogin.setId_login(teclado.nextInt());
+        teclado.nextLine();
+        System.out.print("Novo Nome: ");
+        Alogin.setNome_login(teclado.nextLine());
+        System.out.print("Nova senha: ");
+        Alogin.setSenha_login(teclado.nextLine());
 
-        LoginDAO VdaoLogin = new LoginDAO();
+        LoginDAO daoLogin = new LoginDAO();
 
-        boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
-
-        if (loginSucesso) {
-            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
-        } else {
-            System.out.println("\nNome ou senha incorretos.");
-        }
+        daoLogin.alterar(Alogin);
+        listaClientes = ClienteDAO.listarTodos();
 
         while (rodando) {
             System.out.println("\n=============================================");
@@ -688,7 +687,7 @@ public class Main {
                             LoginDAO daoLogin = new LoginDAO();
 
                             daoLogin.alterar(Alogin);
-                            listaLogin = LoginDAO.listarTodos();
+                            listaClientes = ClienteDAO.listarTodos();
 
                             break;
                         case 4:
