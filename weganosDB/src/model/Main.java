@@ -401,20 +401,62 @@ public class Main {
                             pedido.idPedido = lerNumeroInteiro(teclado);
                             pedido.dataPedido = LocalDate.now();
                             System.out.print("ID do Cliente associado: ");
-                            pedido.fkClienteIdCliente = lerNumeroInteiro(teclado);
+                            Cliente cli = new Cliente();
+                            cli.setId(lerNumeroInteiro(teclado));
+                            pedido.setFkClienteIdCliente(cli);
                             System.out.print("ID da Transportadora associada: ");
-                            pedido.fkTransportadoraIdTransportadora = lerNumeroInteiro(teclado);
+                            Transportadora transp = new Transportadora();
+                            transp.setIdTransportadora(lerNumeroInteiro(teclado));
+                            pedido.setFkTransportadoraIdTransportadora(transp);
 
+                            PedidoDAO dao = new PedidoDAO();
+
+                            
                             listaPedidos.add(pedido);
                             System.out.println("Sucesso: Pedido adicionado a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE PEDIDOS ] ---");
+
+                            listaPedidos = dao.listar();
+
+                            for(Pedido p : listaPedidos){
+                                p.mostrarCarrinho();
+                            }
+
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR PEDIDO ] ---");
+                            Pedido pedido2 = new Pedido();
+
+                            System.out.println("Digite o id do pedido que deseja alterar: \n");
+                            pedido2.setIdPedido(lerNumeroInteiro(teclado));
+                            System.out.println("Digite a nova data do pedido: \n");
+                            pedido2.setDataPedido(teclado.nextLine());
+                            System.out.println("Digite o novo id do cliente: \n");
+                            pedido2.setFkClienteIdCliente(teclado.nextLine());
+                            System.out.println("Digite o novo id da transportadora: \n");
+                            pedido2.setFkTransportadoraIdTransportadora(teclado.nextLine());
+
+                            PedidoDAO newDao = new PedidoDAO();
+                            
+                            dao.alterar(pedido2);
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR PEDIDO ] ---");
+
+                            Pedido PedidoDel = new Pedido();
+
+                            System.out.print("Digite o ID da Transportadora que deseja EXCLUIR: ");
+                            PedidoDel.setIdPedido(lerNumeroInteiro(teclado));
+
+                            PedidoDAO pDeletar = new PedidoDAO();
+                            pDeletar.deletar(PedidoDel);
                             break;
                         case 0:
+                            break;
+                        default:
+                            System.out.println("Aviso: Opcao incorreta. Escolha um numero listado.");
                             break;
                     }
                     break;
@@ -438,24 +480,66 @@ public class Main {
 
                             CarrinhoContem carrinho = new CarrinhoContem();
                             System.out.print("ID do Pedido: ");
-                            carrinho.fkPedidoIdPedido = lerNumeroInteiro(teclado);
+                            Pedido p = new Pedido();
+                            p.setIdPedido(lerNumeroInteiro(teclado));
+                            carrinho.setFkPedidoIdPedido(p);;
                             System.out.print("ID do Produto: ");
-                            carrinho.fkProdutoIdProduto = lerNumeroInteiro(teclado);
+                            Produto produto = new Produto();
+                            
+                            carrinho.setFkProdutoIdProduto(produto);
                             System.out.print("Quantidade de itens: ");
                             carrinho.quantidadeProdutosCo = lerNumeroInteiro(teclado);
                             System.out.print("Valor unitario do item: R$ ");
                             carrinho.valorCompra = lerPreco(teclado);
 
+                            CarrinhoContemDAO dao = new CarrinhoContemDAO();
+
                             listaCarrinhos.add(carrinho);
                             System.out.println("Sucesso: Item associado ao carrinho.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE COMPRAS ] ---");
+
+                            listaCarrinhos = dao.listar();
+
+                            for(CarrinhoContem c : listaCarrinhos){
+                                c.mostrarCarrinho();
+                            }
+
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR CARRINHO ] ---");
+                            CarrinhoContem carrinho2 = new CarrinhoContem();
+
+                            System.out.println("Digite o novo id do pedido: \n");
+                            carrinho2.setFkPedidoIdPedido(teclado.nextLine());
+                            System.out.println("Digite o novo id do produto: \n");
+                            carrinho2.setFkProdutoIdProduto(teclado.nextLine());
+                            System.out.println("Digite a nova quantidade de itens");
+                            carrinho2.setQuantidadeProdutosCo(lerNumeroInteiro(teclado));
+                            System.out.println("Digite o novo valor unitário: \n");
+                            carrinho2.setValorCompra(lerPreco(teclado));
+
+                            CarrinhoContemDAO newDao = new CarrinhoContemDAO();
+
+                            dao.alterar(carrinho2);
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR CARRINHO ] ---");
+                            CarrinhoContem carrinhoDel = new CarrinhoContem();
+
+                            System.out.println("Digite o id do");
+                            carrinhoDel.setFkPedidoIdPedido(teclado.nextLine());
+
+
+
+                            CarrinhoContemDAO pDeletar = new CarrinhoContemDAO();
+                            pDeletar.deletar(carrinhoDel);
                             break;
                         case 0:
+                            break;
+                        default:
+                            System.out.println("Aviso: Opcao incorreta. Escolha um numero listado.");
                             break;
                     }
                     break;

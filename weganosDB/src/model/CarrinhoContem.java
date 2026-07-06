@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class CarrinhoContem {
     public int quantidadeProdutosCo;
     public BigDecimal valorCompra;
-    public int fkPedidoIdPedido;
-    public int fkProdutoIdProduto;
+    public Pedido fkPedidoIdPedido;
+    public Produto fkProdutoIdProduto;
 
 
     public CarrinhoContem(){
@@ -15,8 +15,8 @@ public class CarrinhoContem {
     }
 
 
-    public CarrinhoContem(int quantidadeProdutosCo, BigDecimal valorCompra, int fkPedidoIdPedido,
-            int fkProdutoIdProduto) {
+    public CarrinhoContem(int quantidadeProdutosCo, BigDecimal valorCompra, Pedido fkPedidoIdPedido,
+            Produto fkProdutoIdProduto) {
         this.quantidadeProdutosCo = quantidadeProdutosCo;
         this.valorCompra = valorCompra;
         this.fkPedidoIdPedido = fkPedidoIdPedido;
@@ -43,16 +43,16 @@ public class CarrinhoContem {
     public void setValorCompra(BigDecimal valorCompra) {
         this.valorCompra = valorCompra;
     }
-    public int getFkPedidoIdPedido() {
+    public Pedido getFkPedidoIdPedido() {
         return fkPedidoIdPedido;
     }
-    public void setFkPedidoIdPedido(int fkPedidoIdPedido) {
+    public void setFkPedidoIdPedido(Pedido fkPedidoIdPedido) {
         this.fkPedidoIdPedido = fkPedidoIdPedido;
     }
-    public int getFkProdutoIdProduto() {
+    public Produto getFkProdutoIdProduto() {
         return fkProdutoIdProduto;
     }
-    public void setFkProdutoIdProduto(int fkProdutoIdProduto) {
+    public void setFkProdutoIdProduto(Produto fkProdutoIdProduto) {
         this.fkProdutoIdProduto = fkProdutoIdProduto;
     }
 

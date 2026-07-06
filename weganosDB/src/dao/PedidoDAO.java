@@ -24,8 +24,8 @@ public class PedidoDAO {
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, pedido.getIdPedido());
             stmt.setObject(2, pedido.getDataPedido());
-            stmt.setInt(3, pedido.getFkClienteIdCliente());
-            stmt.setInt(4, pedido.getFkTransportadoraIdTransportadora());
+            stmt.setObject(3, pedido.getFkClienteIdCliente());
+            stmt.setObject(4, pedido.getFkTransportadoraIdTransportadora());
 
 
             stmt.executeUpdate();
@@ -69,8 +69,8 @@ public class PedidoDAO {
         try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setObject(1, pedido.getDataPedido());
-            stmt.setInt(2, pedido.getFkClienteIdCliente());
-            stmt.setInt(3, pedido.getFkTransportadoraIdTransportadora());
+            stmt.setObject(2, pedido.getFkClienteIdCliente());
+            stmt.setObject(3, pedido.getFkTransportadoraIdTransportadora());
 
 
             stmt.setInt(4, pedido.getIdPedido());
