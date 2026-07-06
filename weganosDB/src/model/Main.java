@@ -179,17 +179,17 @@ public class Main {
                             Transportadora transportadora = new Transportadora(0, null, null, null, null, null);
 
                             System.out.print("Nome da Empresa: ");
-                            transportadora.nomeTransportadora = teclado.nextLine();
+                            transportadora.setNomeTransportadora(teclado.nextLine());
                             System.out.print("Hora de Abertura (ex: 08): ");
                             int horaAb = lerNumeroInteiro(teclado);
-                            transportadora.horarioAberturaTranspo = LocalTime.of(horaAb, 0);
+                            transportadora.setHorarioAberturaTranspo(LocalTime.of(horaAb, 0));
                             System.out.print("Hora de Fechamento (ex: 18): ");
                             int horaFe = lerNumeroInteiro(teclado);
-                            transportadora.horarioFechamentoTran = LocalTime.of(horaFe, 0);
+                            transportadora.setHorarioFechamentoTran(LocalTime.of(horaFe, 0));
                             System.out.print("CNPJ: ");
-                            transportadora.cnpjTransportadora = teclado.nextLine();
+                            transportadora.setCnpjTransportadora(teclado.nextLine());
                             System.out.print("Valor de Contratacao Mensal: R$ ");
-                            transportadora.contratacaoMensalTran = lerPreco(teclado);
+                            transportadora.setContratacaoMensalTran(lerPreco(teclado));
 
                             TransportadoraDAO transportadoraDAO = new TransportadoraDAO();
 
@@ -269,15 +269,16 @@ public class Main {
                             System.out.println("\n--- [ NOVO FORNECEDOR ] ---");
 
                             Fornecedor fornecedor = new Fornecedor();
-                            System.out.print("ID do Fornecedor: ");
-                            fornecedor.idFornecedor = lerNumeroInteiro(teclado);
+        
                             System.out.print("Nome da Empresa: ");
-                            fornecedor.nomeFornecedor = teclado.nextLine();
+                            fornecedor.setNomeFornecedor(teclado.nextLine());
                             System.out.print("CNPJ: ");
-                            fornecedor.cnpjFornecedor = teclado.nextLine();
+                            fornecedor.setCnpjFornecedor(teclado.nextLine());
                             System.out.print("Telefone: ");
-                            fornecedor.telefoneFornecedor = teclado.nextLine();
+                            fornecedor.setTelefoneFornecedor(teclado.nextLine());
 
+                            FornecedorDAO Cforrnecedor = new FornecedorDAO();
+                            Cforrnecedor.salvar(fornecedor);
                             listaFornecedores.add(fornecedor);
 
                             System.out.println("Sucesso: Fornecedor adicionado a lista.");
@@ -310,13 +311,13 @@ public class Main {
                             System.out.println("\n--- [ NOVA CATEGORIA ] ---");
 
                             Categoria categoria = new Categoria();
-                            System.out.print("ID da Categoria: ");
-                            categoria.idCategoria = lerNumeroInteiro(teclado);
+                            
                             System.out.print("Nome da Categoria: ");
-                            categoria.nomeCategoria = teclado.nextLine();
+                            categoria.setNomeCategoria(teclado.nextLine());
                             System.out.print("Descricao: ");
-                            categoria.descCategoria = teclado.nextLine();
+                            categoria.setDescCategoria(teclado.nextLine());
 
+                            CategoriaDAO = Ccategoria = new CategoriaDAO();
                             listaCategorias.add(categoria);
                             System.out.println("Sucesso: Categoria adicionada a lista.");
                             break;
