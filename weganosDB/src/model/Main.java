@@ -27,14 +27,33 @@ public class Main {
 
         listaClientes = ClienteDAO.listarTodos();
         listaTransportadoras = TransportadoraDAO.listarTodos();
-        // listaAvaliacoes = AvaliacaoDAO.listarTodos();
-        // listaFornecedores = FornecedorDAO.listarTodos();
-        // listaCategorias = CategoriaDAO.listarTodos();
-        // listaProdutos = ProdutoDAO.listarTodos();
-        // listaPedidos = PedidoDAO.listarTodos();
-        // listaCarrinhos = CarrinhoContemDAO.listarTodos();
-        // listaPagamentos = Pagamento.listarTodos();
+
+        listaAvaliacoes = AvaliacaoDAO.listarTodos();
+        listaFornecedores = FornecedorDAO.listarTodos();
+        listaCategorias = CategoriaDAO.listarTodos();
+        listaProdutos = ProdutoDAO.listarTodos();
+        listaPedidos = PedidoDAO.listarTodos();
+        listaCarrinhos = CarrinhoContemDAO.listarTodos();
+        listaPagamentos = Pagamento.listarTodos();
         listaLogin = LoginDAO.listarTodos();
+
+        System.out.println("\n--- [ VERIFICAR LOGIN ] ---");
+        Login Vlogin = new Login();
+
+        System.out.print("Nome: ");
+        Vlogin.setNome_login(teclado.nextLine());
+        System.out.print("Senha: ");
+        Vlogin.setSenha_login(teclado.nextLine());
+
+        LoginDAO VdaoLogin = new LoginDAO();
+
+        boolean loginSucesso = VdaoLogin.verificar(Vlogin.getNome_login(), Vlogin.getSenha_login());
+
+        if (loginSucesso) {
+            System.out.println("\nLogin realizado com sucesso! Bem-vindo.");
+        } else {
+            System.out.println("\nNome ou senha incorretos.");
+        }
 
         while (rodando) {
             System.out.println("\n=============================================");
@@ -310,21 +329,59 @@ public class Main {
                             System.out.println("\n--- [ NOVA CATEGORIA ] ---");
 
                             Categoria categoria = new Categoria();
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf733418310af5fd5efd1f0905e4d1311a8f46ae
                             System.out.print("Nome da Categoria: ");
                             categoria.setNomeCategoria(teclado.nextLine());
                             System.out.print("Descricao: ");
                             categoria.setDescCategoria(teclado.nextLine());
+                            CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-                            CategoriaDAO = Ccategoria = new CategoriaDAO();
-                            listaCategorias.add(categoria);
+                            categoriaDAO.salvar(categoria);
+
                             System.out.println("Sucesso: Categoria adicionada a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE CATEGORIAS ] ---");
+
+                            listaCategorias = CategoriaDAO.listarTodos();
+                            for (Categoria c : listaCategorias) {
+                                c.mostrarCategoria();
+                            }
+
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR CATEGORIA ] ---");
+
+                            Categoria categoriaParaAlterar = new Categoria();
+
+                            System.out.print("Digite o ID da categoria que deseja alterar: ");
+                            categoriaParaAlterar.setIdCategoria(teclado.nextInt());
+                            teclado.nextLine();
+                            System.out.print("Novo Nome: ");
+                            categoriaParaAlterar.setNomeCategoria(teclado.nextLine());
+                            System.out.print("Nova Descrição: ");
+                            categoriaParaAlterar.setDescCategoria(teclado.nextLine());
+
+                            CategoriaDAO daoAlterar = new CategoriaDAO();
+
+                            daoAlterar.alterar(categoriaParaAlterar);
+                            listaCategorias = CategoriaDAO.listarTodos();
+
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR CATEGORIA ] ---");
+
+                            Categoria categoriaDeletar = new Categoria();
+
+                            System.out.print("Digite o ID da Categoria que deseja EXCLUIR: ");
+                            categoriaDeletar.setIdCategoria(lerNumeroInteiro(teclado));
+
+                            CategoriaDAO cDeletar = new CategoriaDAO();
+                            cDeletar.deletar(categoriaDeletar);
+
                             break;
                         case 0:
                             break;
@@ -347,7 +404,9 @@ public class Main {
                     switch (opcao2) {
                         case 1:
                             System.out.println("\n--- [ NOVO PRODUTO ] ---");
+
                             Produto produto = new Produto();
+
                             System.out.print("Nome do Produto: ");
                             produto.nomeProduto = teclado.nextLine();
                             System.out.print("Preco Base: R$ ");
@@ -370,10 +429,44 @@ public class Main {
                             System.out.println("Sucesso: Produto adicionado a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE PRODUTOS ] ---");
+
+                            // listaProdutos = ProdutoDAO.listarTodos();
+                            for (Produto p : listaProdutos) {
+                                // p.mostrarCategoria();
+                            }
+
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR PRODUTO ] ---");
+
+                            Produto produtoAlterar = new Produto();
+
+                            System.out.print("Digite o ID do produto que deseja alterar: ");
+                            produtoAlterar.setIdProduto(teclado.nextInt());
+                            teclado.nextLine();
+                            System.out.print("Novo Nome: ");
+                            produtoAlterar.setNomeProduto(teclado.nextLine());
+                            System.out.print("Novo Preço: ");
+                            produtoAlterar.setPrecoProduto(teclado.nextBigDecimal());
+
+                            CategoriaDAO daoAlterar = new CategoriaDAO();
+
+                            // daoAlterar.alterar(produtoAlterar);
+                            listaCategorias = CategoriaDAO.listarTodos();
+
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR CATEGORIA ] ---");
+
+                            Categoria categoriaDeletar = new Categoria();
+
+                            System.out.print("Digite o ID da Categoria que deseja EXCLUIR: ");
+                            categoriaDeletar.setIdCategoria(lerNumeroInteiro(teclado));
+
+                            CategoriaDAO cDeletar = new CategoriaDAO();
+                            cDeletar.deletar(categoriaDeletar);
+
                             break;
                         case 0:
                             break;
@@ -408,6 +501,7 @@ public class Main {
                             System.out.println("Sucesso: Pedido adicionado a lista.");
                             break;
                         case 2:
+
                             break;
                         case 3:
                             break;
@@ -477,18 +571,20 @@ public class Main {
                             System.out.println("\n--- [ REGISTRAR PAGAMENTO ] ---");
 
                             Pagamento pagamento = new Pagamento();
-                            System.out.print("ID do Pagamento: ");
-                            pagamento.setidPagamento = lerNumeroInteiro(teclado);
-                            System.out.print("Forma de Pagamento: ");
-                            pagamento.formaPagamento = teclado.nextLine();
-                            System.out.print("Status do Pagamento: ");
-                            pagamento.statusPagamento = teclado.nextLine();
-                            System.out.print("Valor Pago: R$ ");
-                            pagamento.valorPagamento = lerPreco(teclado);
-                            System.out.print("ID do Pedido: ");
-                            pagamento.fkPedidoIdPedido = lerNumeroInteiro(teclado);
 
+                            System.out.print("Forma de Pagamento: ");
+                            pagamento.setFormaPagamento(teclado.nextLine());
+                            System.out.print("Status do Pagamento: ");
+                            pagamento.setStatusPagamento(teclado.nextLine());
+                            System.out.print("Valor Pago: R$ ");
+                            pagamento.setValorPagamento(lerPreco(teclado));
+                            System.out.print("ID do Pedido: ");
+                            pagamento.setFkPedidoIdPedido(lerNumeroInteiro(teclado));
+
+                            PagamentosDAO Cpagamento = new PagamentosDAO();
+                            Cpagamento.salvar(pagamento);
                             listaPagamentos.add(pagamento);
+
                             System.out.println("Sucesso: Pagamento adicionado a lista.");
                             break;
                         case 2:
@@ -519,15 +615,16 @@ public class Main {
                             System.out.println("\n--- [ NOVA AVALIACAO ] ---");
 
                             Avaliacao avaliacao = new Avaliacao();
-                            System.out.print("ID da Avaliacao: ");
-                            avaliacao.idAvaliacao = lerNumeroInteiro(teclado);
-                            System.out.print("Nota da Avaliacao (1 a 5): ");
-                            avaliacao.notaAvaliacao = lerNumeroInteiro(teclado);
-                            System.out.print("Texto da Avaliacao: ");
-                            avaliacao.descAvaliacao = teclado.nextLine();
-                            System.out.print("ID do Produto: ");
-                            avaliacao.fkProdutoIdProduto = lerNumeroInteiro(teclado);
 
+                            System.out.print("Nota da Avaliacao (1 a 5): ");
+                            avaliacao.setNotaAvaliacao(lerNumeroInteiro(teclado));
+                            System.out.print("Texto da Avaliacao: ");
+                            avaliacao.setDescAvaliacao(teclado.nextLine());
+                            System.out.print("ID do Produto: ");
+                            avaliacao.setFkProdutoIdProduto(lerNumeroInteiro(teclado));
+
+                            AvaliacaoDAO Cavalia = new AvaliacaoDAO();
+                            Cavalia.salvar(avaliacao);
                             listaAvaliacoes.add(avaliacao);
                             System.out.println("Sucesso: Avaliacao adicionada a lista.");
                             break;
@@ -596,7 +693,7 @@ public class Main {
                             LoginDAO daoLogin = new LoginDAO();
 
                             daoLogin.alterar(Alogin);
-                            listaClientes = ClienteDAO.listarTodos();
+                            listaLogin = LoginDAO.listarTodos();
 
                             break;
                         case 4:
@@ -621,19 +718,17 @@ public class Main {
                     System.out.println("\n--- [ LISTAGEM DE DADOS ARMAZENADOS ] ---");
                     System.out.println("Total de Clientes: " + listaClientes.size());
                     for (Cliente c : listaClientes) {
-                        System.out.println(" - ID: " + c.getId() + " | Nome: " + c.getNome());
+                        c.mostrarCliente();
                     }
                     System.out.println("Total de Transportadoras: " + listaTransportadoras.size());
                     for (Transportadora t : listaTransportadoras) {
-                        System.out
-                                .println(" - ID: " + t.getIdTransportadora() + " | Nome: " + t.getNomeTransportadora());
+                        t.mostrarTransportadora();
                     }
                     System.out.println("Total de Fornecedores: " + listaFornecedores.size());
                     System.out.println("Total de Categorias: " + listaCategorias.size());
                     System.out.println("Total de Produtos: " + listaProdutos.size());
                     for (Produto p : listaProdutos) {
-                        System.out.println(" - ID: " + p.idProduto + " | Nome: " + p.nomeProduto + " | Estoque: "
-                                + p.qtdEstoqueProduto);
+                        p.mostrarProduto();
                     }
                     System.out.println("Total de Pedidos: " + listaPedidos.size());
                     System.out.println("Total de Itens de Carrinho: " + listaCarrinhos.size());

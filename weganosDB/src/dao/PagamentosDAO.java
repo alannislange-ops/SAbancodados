@@ -1,4 +1,5 @@
 package dao;
+
 import model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 import conexao.Conexao;
 
 public class PagamentosDAO {
-public void salvar(Pagamento pagamento) {
+
+    public void salvar(Pagamento pagamento) {
         String sql = "INSERT INTO PAGAMENTO (forma_pagamento, status_pagamento, valor_pagamento, FK_PEDIDO_id_pedido) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConexao();
@@ -18,7 +20,12 @@ public void salvar(Pagamento pagamento) {
             stmt.setString(1, pagamento.getFormaPagamento());
             stmt.setString(2, pagamento.getStatusPagamento());
             stmt.setBigDecimal(3, pagamento.getValorPagamento());
-            stmt.setInt(4, pagamento.getFkPedidoIdPedido());
+
+            if (pagamento.getPedido() != null) {
+                stmt.setInt(4, pagamento.getPedido().getIdPedido());
+            } else {
+                stmt.setNull(4, java.sql.Types.INTEGER);
+            }
 
             stmt.executeUpdate();
             System.out.println("Sucesso: Pagamento salvo no banco de dados!");
@@ -43,7 +50,11 @@ public void salvar(Pagamento pagamento) {
                 pagamento.setFormaPagamento(rs.getString("forma_pagamento"));
                 pagamento.setStatusPagamento(rs.getString("status_pagamento"));
                 pagamento.setValorPagamento(rs.getBigDecimal("valor_pagamento"));
-                pagamento.setFkPedidoIdPedido(rs.getInt("FK_PEDIDO_id_pedido")); // Nome exato da FK no banco
+
+                Pedido pedidoProvisorio = new Pedido();
+                pedidoProvisorio.setIdPedido(rs.getInt("FK_PEDIDO_id_pedido"));
+
+                pagamento.setPedido(pedidoProvisorio);
 
                 lista.add(pagamento);
             }
@@ -64,7 +75,12 @@ public void salvar(Pagamento pagamento) {
             stmt.setString(1, pagamento.getFormaPagamento());
             stmt.setString(2, pagamento.getStatusPagamento());
             stmt.setBigDecimal(3, pagamento.getValorPagamento());
-            stmt.setInt(4, pagamento.getFkPedidoIdPedido());
+
+            if (pagamento.getPedido() != null) {
+                stmt.setInt(4, pagamento.getPedido().getIdPedido());
+            } else {
+                stmt.setNull(4, java.sql.Types.INTEGER);
+            }
 
             stmt.setInt(5, pagamento.getIdPagamento());
 

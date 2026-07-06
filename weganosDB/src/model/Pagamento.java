@@ -4,13 +4,22 @@ import java.math.BigDecimal;
 
 public class Pagamento {
 
-    public int idPagamento;
-    public String formaPagamento;
-    public String statusPagamento;
-    public BigDecimal valorPagamento;
-    public int fkPedidoIdPedido;
+    private int idPagamento;
+    private String formaPagamento;
+    private String statusPagamento;
+    private BigDecimal valorPagamento;
+    private Pedido pedido;
 
     public Pagamento() {
+    }
+
+    public Pagamento(int idPagamento, String formaPagamento, String statusPagamento, BigDecimal valorPagamento,
+            Pedido pedido) {
+        this.idPagamento = idPagamento;
+        this.formaPagamento = formaPagamento;
+        this.statusPagamento = statusPagamento;
+        this.valorPagamento = valorPagamento;
+        this.pedido = pedido;
     }
 
     public void mostrarPagamento() {
@@ -19,7 +28,7 @@ public class Pagamento {
                 + "\nForma: " + formaPagamento
                 + "\nStatus: " + statusPagamento
                 + "\nValor: " + valorPagamento
-                + "\nID Pedido: " + fkPedidoIdPedido);
+                + "\nID Pedido: " + (pedido != null ? pedido.getIdPedido() : "Não associado"));
         System.out.println("=======================================");
     }
 
@@ -55,19 +64,11 @@ public class Pagamento {
         this.valorPagamento = valorPagamento;
     }
 
-    public int getFkPedidoIdPedido() {
-        return fkPedidoIdPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setFkPedidoIdPedido(int fkPedidoIdPedido) {
-        this.fkPedidoIdPedido = fkPedidoIdPedido;
-    }
-
-    public Pagamento(int idPagamento, String formaPagamento, String statusPagamento, BigDecimal valorPagamento, int fkPedidoIdPedido) {
-        this.idPagamento = idPagamento;
-        this.formaPagamento = formaPagamento;
-        this.statusPagamento = statusPagamento;
-        this.valorPagamento = valorPagamento;
-        this.fkPedidoIdPedido = fkPedidoIdPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }
