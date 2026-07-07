@@ -757,8 +757,8 @@ public class Main {
                             System.out.println("15 -> Mostrar o total recebido com as vendas no ano de 2026");
                             System.out.println("16 -> Listar os maiores valores de venda dos produtos");
                             System.out.println("17 -> Listar as avaliações relacionadas a transportadora");
-                            System.out.println("18 -> Mostrar o faturamento, custo e lucro por produto vendido");
-                            System.out.println("19 -> Mostrar o total lucrado pelo serviço de ecommerce ");
+                            System.out.println("18 -> Mostrar o total lucrado pelo serviço de ecommerce ");
+                            System.out.println("19 -> Mostrar o faturamento, custo e lucro por produto vendido");
                             System.out.println("20 -> Listar os pagamentos não realizados");
                             System.out.println("0 -> Sair do submenu de relatórios");
                             System.out.print("Escolha uma opcao: ");
@@ -819,10 +819,10 @@ public class Main {
                                     daorelatorio.avaliacoesTransportadora();
                                     break;
                                 case 18:
-                                    daorelatorio.faturamentoLucroCustoProdutos();
+                                    daorelatorio.totalLucrado();
                                     break;
                                 case 19:
-                                    daorelatorio.totalLucrado();
+                                    daorelatorio.faturamentoLucroCustoProdutos();
                                     break;
                                 case 20:
                                     daorelatorio.pagamentosNaoRealizados();
