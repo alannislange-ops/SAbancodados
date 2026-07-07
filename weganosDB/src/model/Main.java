@@ -522,17 +522,13 @@ public class Main {
                             System.out.println("Sucesso: Pedido adicionado a lista.");
                             break;
                         case 2:
-<<<<<<< HEAD
                             System.out.println("\n--- [ LISTA DE PEDIDOS ] ---");
 
-                            listaPedidos = dao.listar();
+                            listaPedidos = dao.listarTodos();
 
                             for(Pedido p : listaPedidos){
                                 p.mostrarCarrinho();
                             }
-=======
->>>>>>> 476c4cd589f7e98a3dafe1f6338b58946127aa1e
-
                             break;
                         case 3:
                             System.out.println("\n--- [ ALTERAR PEDIDO ] ---");
