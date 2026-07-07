@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 public class Pagamento {
 
-    private int idPagamento;
-    private String formaPagamento;
-    private String statusPagamento;
-    private BigDecimal valorPagamento;
-    private int fkPedidoIdPedido;
+    public int idPagamento;
+    public String formaPagamento;
+    public String statusPagamento;
+    public BigDecimal valorPagamento;
+    public int fkPedidoIdPedido;
 
     public Pagamento() {
     }

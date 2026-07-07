@@ -2,5 +2,6 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\alannis_lange\\Downloads\\mysql-connector-j-9.7.0\\mysql-connector-j-9.7.0.jar"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
