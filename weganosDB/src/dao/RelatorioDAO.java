@@ -212,14 +212,14 @@ public class RelatorioDAO {
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             System.out.println("\n--- QUANTIDADES DE ESTOQUE ---");
-            System.out.printf("%-30s | %-20s\n", "Nome do produto", "Quantidade em estoque");
+            System.out.printf("%-50s | %-20s\n", "Nome do produto", "Quantidade em estoque");
             System.out.println("---------------------------------------------------------");
 
             while (rs.next()) {
                 String nome = rs.getString("nome_produto");
                 int qtdEstoque = rs.getInt("qtd_estoque_produto");
 
-                System.out.printf("%-30s | %-20d\n", nome, qtdEstoque);
+                System.out.printf("%-50s | %-20d\n", nome, qtdEstoque);
             }
             System.out.println("---------------------------------------------------------");
 
@@ -229,12 +229,12 @@ public class RelatorioDAO {
     }
 
     public void cidadeMaisUtilizadora() {
-        String sql = "SELECT * FROM cidade_mais_utilizadora";
+        String sql = "SELECT * FROM cidade_mais_utilizadora LIMIT 10";
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             System.out.println("\n--- CIDADES QUE MAIS UTILIZAM O SERVIÇO ---");
-            System.out.printf("%-25s | %-20s\n", "Cidade", "Quantidade em estoque");
+            System.out.printf("%-25s | %-20s\n", "Cidade", "Quantidade de pedidos");
             System.out.println("---------------------------------------------------------");
 
             while (rs.next()) {
@@ -251,9 +251,21 @@ public class RelatorioDAO {
     }
 
     public void produtoMaisSolicitadoUltimoMes() {
-        String sql = "SELECT * FROM produto_mais_solicitado_ultimo_mes";
+        String sql = "SELECT * FROM produto_mais_solicitado_ultimo_mes LIMIT 10";
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("\n--- PRODUTOS MAIS SOLICITADOS NO ÚLTIMO MÊS ---");
+            System.out.printf("%-50s | %-20s\n", "Nome do produto", "Quantidade de pedidos");
+            System.out.println("---------------------------------------------------------");
+
+            while (rs.next()) {
+                String produto = rs.getString("nome_produto");
+                int qtdProdutos = rs.getInt("quantidade_produtos");
+
+                System.out.printf("%-50s | %-20d\n", produto, qtdProdutos);
+            }
+            System.out.println("---------------------------------------------------------");
 
         } catch (SQLException e) {
             System.err.println("Erro ao listar view: " + e.getMessage());
@@ -265,15 +277,41 @@ public class RelatorioDAO {
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
+            System.out.println("\n--- PRODUTOS FORNECIDOS POR FORNECEDOR ---");
+            System.out.printf("%-50s | %-20s\n", "Nome do fornecedor", "Quantidade fornecida");
+            System.out.println("---------------------------------------------------------");
+
+            while (rs.next()) {
+                String fornecedor = rs.getString("nome_fornecedor");
+                int qtdProdutos = rs.getInt("COUNT(p.id_produto)");
+
+                System.out.printf("%-50s | %-20d\n", fornecedor, qtdProdutos);
+            }
+            System.out.println("---------------------------------------------------------");
+
         } catch (SQLException e) {
             System.err.println("Erro ao listar view: " + e.getMessage());
         }
     }
 
     public void produtosFornecedoresMenorEstoque() {
-        String sql = "SELECT * FROM produtos_fornecedores_menor_estoque";
+        String sql = "SELECT * FROM produtos_fornecedores_menor_estoque LIMIT 10";
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("\n--- PRODUTOS FORNECIDOS COM O MENOR ESTOQUE ---");
+            System.out.printf("%-50s | %-15s | %-50s | %-20s\n", "Nome do produto", "Estoque atual", "Nome do fornecedor", "Telefone para contato");
+            System.out.println("---------------------------------------------------------");
+
+            while (rs.next()) {
+                String produto = rs.getString("nome_produto");
+                int qtdEstoque = rs.getInt("estoque_atual");
+                String fornecedor = rs.getString("nome_fornecedor");
+                String telefone = rs.getString("telefone_fornecedor");
+
+                System.out.printf("%-50s | %-15d | %-50s | %-20s\n", produto, qtdEstoque, fornecedor, telefone);
+            }
+            System.out.println("---------------------------------------------------------");
 
         } catch (SQLException e) {
             System.err.println("Erro ao listar view: " + e.getMessage());
@@ -285,15 +323,39 @@ public class RelatorioDAO {
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
+            System.out.println("\n--- PRODUTOS FORNECIDOS COM O MENOR ESTOQUE ---");
+            System.out.printf("%-12s\n", "Valor total");
+            System.out.println("---------------------------------------------------------");
+
+            while (rs.next()) {
+                double valorTotal = rs.getDouble("valor_total");
+
+                System.out.printf("R$ %-9.2f\n", valorTotal);
+            }
+            System.out.println("---------------------------------------------------------");
+
         } catch (SQLException e) {
             System.err.println("Erro ao listar view: " + e.getMessage());
         }
     }
 
     public void precoVendaMaisCaros() {
-        String sql = "SELECT * FROM preco_venda_mais_caros";
+        String sql = "SELECT * FROM preco_venda_mais_caros LIMIT 10";
 
         try (Connection conn = Conexao.getConexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("\n--- MAIORES VALORES DE VENDA ---");
+            System.out.printf("%-50s | %-25s | %-12s\n", "Nome do produto", "Quantidade de produtos", "Valores");
+            System.out.println("---------------------------------------------------------");
+
+            while (rs.next()) {
+                String produto = rs.getString("nome_produto");
+                int qtdProdutos = rs.getInt("quantidade_produtos");
+                double valorCompra = rs.getDouble("valor_compra");
+
+                System.out.printf("%-50s | %-25d | R$ %-9.2f\n", produto, qtdProdutos, valorCompra);
+            }
+            System.out.println("---------------------------------------------------------");
 
         } catch (SQLException e) {
             System.err.println("Erro ao listar view: " + e.getMessage());
