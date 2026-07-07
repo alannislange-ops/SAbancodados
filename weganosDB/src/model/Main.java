@@ -471,15 +471,15 @@ public class Main {
 
                             break;
                         case 4:
-                            System.out.println("\n--- [ DELETAR CATEGORIA ] ---");
+                            System.out.println("\n--- [ DELETAR PRODUTO ] ---");
 
-                            Categoria categoriaDeletar = new Categoria();
+                            Produto produtoDeletar = new Produto();
 
                             System.out.print("Digite o ID da Categoria que deseja EXCLUIR: ");
-                            categoriaDeletar.setIdCategoria(lerNumeroInteiro(teclado));
+                            produtoDeletar.setIdProduto(lerNumeroInteiro(teclado));
 
-                            CategoriaDAO cDeletar = new CategoriaDAO();
-                            cDeletar.deletar(categoriaDeletar);
+                            ProdutoDAO pDeletar = new ProdutoDAO();
+                            pDeletar.deletar(produtoDeletar);
 
                             break;
                         case 0:
@@ -760,13 +760,77 @@ public class Main {
                             System.out.println("18 -> Mostrar o faturamento, custo e lucro por produto vendido");
                             System.out.println("19 -> Mostrar o total lucrado pelo serviço de ecommerce ");
                             System.out.println("20 -> Listar os pagamentos não realizados");
+                            System.out.println("0 -> Sair do submenu de relatórios");
                             System.out.print("Escolha uma opcao: ");
 
                             int opcaoView = lerNumeroInteiro(teclado);
 
                             RelatorioDAO daorelatorio = new RelatorioDAO();
-
-                            daorelatorio.transportadorasMaisAcessiveis();
+                            switch (opcaoView) {
+                                case 1:
+                                    daorelatorio.transportadorasMaisAcessiveis();
+                                    break;
+                                case 2:
+                                    daorelatorio.pioresAvaliacoes();
+                                    break;
+                                case 3:
+                                    daorelatorio.produtosMaisSolicitados();
+                                    break;
+                                case 4:
+                                    daorelatorio.produtosMenosSolicitados();
+                                    break;
+                                case 5:
+                                    daorelatorio.melhoresProdutosAvaliados();
+                                    break;
+                                case 6:
+                                    daorelatorio.produtosMenorEstoque();
+                                    break;
+                                case 7:
+                                    daorelatorio.metodosPagamentoUtilizados();
+                                    break;
+                                case 8:
+                                    daorelatorio.comprasMaisCaras();
+                                    break;
+                                case 9:
+                                    daorelatorio.categoriasMaisVendidas();
+                                    break;
+                                case 10:
+                                    daorelatorio.quantidadeEstoqueProdutos();
+                                    break;
+                                case 11:
+                                    daorelatorio.cidadeMaisUtilizadora();
+                                    break;
+                                case 12:
+                                    daorelatorio.produtoMaisSolicitadoUltimoMes();
+                                    break;
+                                case 13:
+                                    daorelatorio.produtosFornecidosQuantidades();
+                                    break;
+                                case 14:
+                                    daorelatorio.produtosFornecedoresMenorEstoque();
+                                    break;
+                                case 15:
+                                    daorelatorio.valorTotal2026();
+                                    break;
+                                case 16:
+                                    daorelatorio.precoVendaMaisCaros();
+                                    break;
+                                case 17:
+                                    daorelatorio.avaliacoesTransportadora();
+                                    break;
+                                case 18:
+                                    daorelatorio.faturamentoLucroCustoProdutos();
+                                    break;
+                                case 19:
+                                    daorelatorio.totalLucrado();
+                                    break;
+                                case 20:
+                                    daorelatorio.pagamentosNaoRealizados();
+                                    break;
+                                default:
+                                    System.out.println(opcaoView != 0? "ID Inválido. Tente novamente." : "");
+                                    break;
+                            }
                             break;
                         case 2:
                             System.out.println("\n--- [ LISTAGEM DE DADOS ARMAZENADOS ] ---");
@@ -792,6 +856,7 @@ public class Main {
                             System.out.println("Total de Avaliacoes: " + listaAvaliacoes.size());
                         break;
                     }
+                    break;
                 case 0:
                     System.out.println("\nFinalizando o programa.");
                     rodando = false;
