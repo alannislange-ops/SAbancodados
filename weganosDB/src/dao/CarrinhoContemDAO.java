@@ -25,8 +25,8 @@ public class CarrinhoContemDAO {
 
             stmt.setInt(1, carrinho.getQuantidadeProdutosCo());
             stmt.setBigDecimal(2, carrinho.getValorCompra());
-            stmt.setInt(3, carrinho.getFkPedidoIdPedido());
-            stmt.setInt(4, carrinho.getFkProdutoIdProduto());
+            stmt.setObject(3, carrinho.getFkPedidoIdPedido());
+            stmt.setObject(4, carrinho.getFkProdutoIdProduto());
 
 
             stmt.executeUpdate();
@@ -37,6 +37,7 @@ public class CarrinhoContemDAO {
             System.err.println("Erro ao salvar o carrinho: " + e.getMessage());
         }
     }
+
 
 
     public static ArrayList<CarrinhoContem> listarTodos() {
@@ -78,8 +79,8 @@ public class CarrinhoContemDAO {
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, carrinho.getQuantidadeProdutosCo());
             stmt.setBigDecimal(2, carrinho.getValorCompra());
-            stmt.setInt(3, carrinho.getFkPedidoIdPedido());
-            stmt.setInt(4, carrinho.getFkProdutoIdProduto());
+            stmt.setObject(3, carrinho.getFkPedidoIdPedido());
+            stmt.setObject(4, carrinho.getFkProdutoIdProduto());
 
 
             stmt.executeUpdate();
@@ -96,7 +97,7 @@ public class CarrinhoContemDAO {
 
         try (Connection conn = Conexao.getConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, carrinho.getFkPedidoIdPedido());
+            stmt.setObject(1, carrinho.getFkPedidoIdPedido());
 
 
             int linhasAfetadas = stmt.executeUpdate();
@@ -112,6 +113,3 @@ public class CarrinhoContemDAO {
         }
     }
 }
-
-
-
