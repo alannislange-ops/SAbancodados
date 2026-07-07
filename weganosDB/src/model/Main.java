@@ -279,7 +279,6 @@ public class Main {
                     }
                     break;
                 case 3:
-
                     System.out.println("\n=============================================");
                     System.out.println("                  FORNECEDOR                 ");
                     System.out.println("=============================================");
@@ -304,19 +303,64 @@ public class Main {
                             System.out.print("Telefone: ");
                             fornecedor.setTelefoneFornecedor(teclado.nextLine());
 
-                            FornecedorDAO Cforrnecedor = new FornecedorDAO();
-                            Cforrnecedor.salvar(fornecedor);
-                            listaFornecedores.add(fornecedor);
+                            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+                            fornecedorDAO.salvar(fornecedor);
 
-                            System.out.println("Sucesso: Fornecedor adicionado a lista.");
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 2:
+                            System.out.println("\n--- [ LISTA DE FORNECEDORES ] ---");
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
+                            if (listaFornecedores.isEmpty()) {
+                                System.out.println("Nenhum fornecedor cadastrado.");
+                            } else {
+                                for (Fornecedor f : listaFornecedores) {
+                                    f.mostrarFornecedor();
+                                }
+                            }
                             break;
+
                         case 3:
+                            System.out.println("\n--- [ ALTERAR FORNECEDOR ] ---");
+
+                            Fornecedor fornAlterar = new Fornecedor();
+
+                            System.out.print("Digite o ID do fornecedor que deseja alterar: ");
+                            fornAlterar.setIdFornecedor(lerNumeroInteiro(teclado));
+                            System.out.print("Novo Nome da Empresa: ");
+                            fornAlterar.setNomeFornecedor(teclado.nextLine());
+                            System.out.print("Novo CNPJ: ");
+                            fornAlterar.setCnpjFornecedor(teclado.nextLine());
+                            System.out.print("Novo Telefone: ");
+                            fornAlterar.setTelefoneFornecedor(teclado.nextLine());
+
+                            FornecedorDAO daoFornAlterar = new FornecedorDAO();
+                            daoFornAlterar.alterar(fornAlterar);
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 4:
+                            System.out.println("\n--- [ DELETAR FORNECEDOR ] ---");
+
+                            Fornecedor fornDeletar = new Fornecedor();
+
+                            System.out.print("Digite o ID do fornecedor que deseja EXCLUIR: ");
+                            fornDeletar.setIdFornecedor(lerNumeroInteiro(teclado));
+
+                            FornecedorDAO daoFornDeletar = new FornecedorDAO();
+                            daoFornDeletar.deletar(fornDeletar);
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 0:
+                            break;
+
+                        default:
+                            System.out.println("Aviso: Opção incorreta. Escolha um número listado.");
                             break;
                     }
                     break;
@@ -464,10 +508,10 @@ public class Main {
                             System.out.print("Novo Preço: ");
                             produtoAlterar.setPrecoProduto(teclado.nextBigDecimal());
 
-                            CategoriaDAO daoAlterar = new CategoriaDAO();
+                            ProdutoDAO daoAlterar = new ProdutoDAO();
 
-                            // daoAlterar.alterar(produtoAlterar);
-                            listaCategorias = CategoriaDAO.listarTodos();
+                            daoAlterar.alterar(produtoAlterar);
+                            listaProdutos = daoAlterar.listarTodos();
 
                             break;
                         case 4:
@@ -475,7 +519,7 @@ public class Main {
 
                             Produto produtoDeletar = new Produto();
 
-                            System.out.print("Digite o ID da Categoria que deseja EXCLUIR: ");
+                            System.out.print("Digite o ID do produto que deseja EXCLUIR: ");
                             produtoDeletar.setIdProduto(lerNumeroInteiro(teclado));
 
                             ProdutoDAO pDeletar = new ProdutoDAO();
@@ -568,7 +612,6 @@ public class Main {
                     break;
 
                 case 8:
-
                     System.out.println("\n=============================================");
                     System.out.println("                  PAGAMENTO                  ");
                     System.out.println("=============================================");
@@ -582,32 +625,79 @@ public class Main {
 
                     switch (opcao2) {
                         case 1:
-                            System.out.println("\n--- [ REGISTRAR PAGAMENTO ] ---");
+                            System.out.println("\n--- [ NOVO PAGAMENTO ] ---");
 
                             Pagamento pagamento = new Pagamento();
 
-                            System.out.print("Forma de Pagamento: ");
+                            System.out.print("Forma de Pagamento (Ex: Cartão, Pix, Boleto): ");
                             pagamento.setFormaPagamento(teclado.nextLine());
-                            System.out.print("Status do Pagamento: ");
+                            System.out.print("Status do Pagamento (Ex: Pago, Pendente): ");
                             pagamento.setStatusPagamento(teclado.nextLine());
-                            System.out.print("Valor Pago: R$ ");
-                            pagamento.setValorPagamento(lerPreco(teclado));
-                            System.out.print("ID do Pedido: ");
+                            System.out.print("Valor do Pagamento (Use ponto para centavos, ex: 150.50): ");
+                            pagamento.setValorPagamento(new java.math.BigDecimal(teclado.nextLine()));
+                            System.out.print("ID do Pedido Relacionado: ");
                             pagamento.setFkPedidoIdPedido(lerNumeroInteiro(teclado));
 
-                            PagamentosDAO Cpagamento = new PagamentosDAO();
-                            Cpagamento.salvar(pagamento);
-                            listaPagamentos.add(pagamento);
+                            PagamentosDAO pagamentosDAO = new PagamentosDAO();
+                            pagamentosDAO.salvar(pagamento);
 
-                            System.out.println("Sucesso: Pagamento adicionado a lista.");
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 2:
+                            System.out.println("\n--- [ LISTA DE PAGAMENTOS ] ---");
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
+                            if (listaPagamentos.isEmpty()) {
+                                System.out.println("Nenhum pagamento cadastrado.");
+                            } else {
+                                for (Pagamento p : listaPagamentos) {
+                                    p.mostrarPagamento();
+                                }
+                            }
                             break;
+
                         case 3:
+                            System.out.println("\n--- [ ALTERAR PAGAMENTO ] ---");
+
+                            Pagamento pagAlterar = new Pagamento();
+
+                            System.out.print("Digite o ID do pagamento que deseja alterar: ");
+                            pagAlterar.setIdPagamento(lerNumeroInteiro(teclado));
+                            System.out.print("Nova Forma de Pagamento: ");
+                            pagAlterar.setFormaPagamento(teclado.nextLine());
+                            System.out.print("Novo Status do Pagamento: ");
+                            pagAlterar.setStatusPagamento(teclado.nextLine());
+                            System.out.print("Novo Valor do Pagamento (Ex: 250.00): ");
+                            pagAlterar.setValorPagamento(new java.math.BigDecimal(teclado.nextLine()));
+                            System.out.print("Novo ID do Pedido Relacionado: ");
+                            pagAlterar.setFkPedidoIdPedido(lerNumeroInteiro(teclado));
+
+                            PagamentosDAO daoPagAlterar = new PagamentosDAO();
+                            daoPagAlterar.alterar(pagAlterar);
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 4:
+                            System.out.println("\n--- [ DELETAR PAGAMENTO ] ---");
+
+                            Pagamento pagDeletar = new Pagamento();
+
+                            System.out.print("Digite o ID do pagamento que deseja EXCLUIR: ");
+                            pagDeletar.setIdPagamento(lerNumeroInteiro(teclado));
+
+                            PagamentosDAO daoPagDeletar = new PagamentosDAO();
+                            daoPagDeletar.deletar(pagDeletar);
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 0:
+                            break;
+
+                        default:
+                            System.out.println("Aviso: Opção incorreta. Escolha um número listado.");
                             break;
                     }
                     break;
