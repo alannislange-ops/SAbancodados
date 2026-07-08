@@ -7,8 +7,14 @@ import java.time.LocalDate;
 public class Pedido {
     public int idPedido;
     public LocalDate dataPedido;
-    public int fkClienteIdCliente;
-    public int fkTransportadoraIdTransportadora;
+    public Cliente fkClienteIdCliente;
+    public Transportadora fkTransportadoraIdTransportadora;
+
+    public void mostrarCarrinho(){
+        System.out.println("=======================================");
+        System.out.println("ID: " + idPedido + "DATA: " + dataPedido + "ID CLIENTE: " + fkClienteIdCliente + "ID TRANSPORTADORA: " + fkTransportadoraIdTransportadora);
+        System.out.println("=======================================");
+    }
 
 
     public int getIdPedido() {
@@ -31,22 +37,22 @@ public class Pedido {
     }
 
 
-    public int getFkClienteIdCliente() {
+    public Cliente getFkClienteIdCliente() {
         return fkClienteIdCliente;
     }
 
 
-    public void setFkClienteIdCliente(int fkClienteIdCliente) {
+    public void setFkClienteIdCliente(Cliente fkClienteIdCliente) {
         this.fkClienteIdCliente = fkClienteIdCliente;
     }
 
 
-    public int getFkTransportadoraIdTransportadora() {
+    public Transportadora getFkTransportadoraIdTransportadora() {
         return fkTransportadoraIdTransportadora;
     }
 
 
-    public void setFkTransportadoraIdTransportadora(int fkTransportadoraIdTransportadora) {
+    public void setFkTransportadoraIdTransportadora(Transportadora fkTransportadoraIdTransportadora) {
         this.fkTransportadoraIdTransportadora = fkTransportadoraIdTransportadora;
     }
 
@@ -72,4 +78,3 @@ public class Pedido {
 
 
 }
-
