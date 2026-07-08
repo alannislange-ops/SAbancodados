@@ -464,9 +464,9 @@ public class Main {
                             System.out.print("Novo Preço: ");
                             produtoAlterar.setPrecoProduto(teclado.nextBigDecimal());
 
-                            CategoriaDAO daoAlterar = new CategoriaDAO();
+                            ProdutoDAO daoAlterar = new ProdutoDAO();
 
-                            // daoAlterar.alterar(produtoAlterar);
+                            daoAlterar.alterar(produtoAlterar);
                             listaCategorias = CategoriaDAO.listarTodos();
 
                             break;
@@ -635,7 +635,7 @@ public class Main {
                             System.out.print("Texto da Avaliacao: ");
                             avaliacao.setDescAvaliacao(teclado.nextLine());
                             System.out.print("ID do Produto: ");
-                            //avaliacao.setFkProdutoIdProduto(lerNumeroInteiro(teclado));
+                            // avaliacao.setFkProdutoIdProduto(lerNumeroInteiro(teclado));
 
                             AvaliacaoDAO Cavalia = new AvaliacaoDAO();
                             Cavalia.salvar(avaliacao);
