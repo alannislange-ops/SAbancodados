@@ -793,8 +793,9 @@ public class Main {
 
                     switch (opcao2) {
                         case 1:
-                            System.out.println("\n--- [ NOVA AVALIACAO ] ---");
+                            System.out.println("\n--- [ NOVA AVALIAÇÃO ] ---");
 
+                            Produto produto = new Produto();
                             Avaliacao avaliacao = new Avaliacao();
 
                             System.out.print("Nota da Avaliacao (1 a 5): ");
@@ -802,18 +803,55 @@ public class Main {
                             System.out.print("Texto da Avaliacao: ");
                             avaliacao.setDescAvaliacao(teclado.nextLine());
                             System.out.print("ID do Produto: ");
-                            // avaliacao.setFkProdutoIdProduto(lerNumeroInteiro(teclado));
 
-                            AvaliacaoDAO Cavalia = new AvaliacaoDAO();
-                            Cavalia.salvar(avaliacao);
+                            produto.setIdProduto(lerNumeroInteiro(teclado));
+                            avaliacao.setFkProdutoIdProduto(produto);
+
+                            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+                            avaliacaoDAO.salvar(avaliacao);
                             listaAvaliacoes.add(avaliacao);
                             System.out.println("Sucesso: Avaliacao adicionada a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE AVALIAÇÃO ] ---");
+
+                            listaAvaliacoes = AvaliacaoDAO.listarTodos();
+                            for (Avaliacao a : listaAvaliacoes) {
+                                a.mostrarAvaliacao();
+                            }
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR AVALIAÇÃO ] ---");
+
+                            Avaliacao avaliacaoAlterar = new Avaliacao();
+                            Produto produtoAlterar = new Produto();
+
+                            System.out.print("Digite o ID da avaliacao que deseja alterar: ");
+                            avaliacaoAlterar.setIdAvaliacao(teclado.nextInt());
+                            System.out.print("Nova Nota: ");
+                            avaliacaoAlterar.setNotaAvaliacao(teclado.nextInt());
+                            teclado.nextLine();
+                            System.out.println("Nova Descricao: ");
+                            avaliacaoAlterar.setDescAvaliacao(teclado.nextLine());
+                            System.out.print("Novo ID do produto: ");
+                            produtoAlterar.setIdProduto(teclado.nextInt());
+                            avaliacaoAlterar.setFkProdutoIdProduto(produtoAlterar);
+
+                            AvaliacaoDAO daoAlterar = new AvaliacaoDAO();
+
+                            daoAlterar.alterar(avaliacaoAlterar);
+                            listaAvaliacoes = daoAlterar.listarTodos();
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR AVALIAÇÃO ] ---");
+
+                            Avaliacao avaliacaoDeletar = new Avaliacao();
+
+                            System.out.print("Digite o ID da avaliacao que deseja EXCLUIR: ");
+                            avaliacaoDeletar.setIdAvaliacao(lerNumeroInteiro(teclado));
+
+                            AvaliacaoDAO aDeletar = new AvaliacaoDAO();
+                            aDeletar.deletar(avaliacaoDeletar);
                             break;
                         case 0:
                             break;

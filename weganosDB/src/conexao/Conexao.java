@@ -8,7 +8,7 @@ public class Conexao {
     
     private static final String URL = "jdbc:mysql://sa-banco-de-dados-estudante-a8e2.d.aivencloud.com:24499/WeganosDB";
     private static final String USUARIO = "avnadmin";
-    private static final String SENHA = "AVNS_3Rvt8jM8fz_HJXwM8k9";
+    private static final String SENHA = "AVNS_k7w9ygfrSBwgWlsRSoP";
 
     public static Connection getConexao() throws SQLException {
         try {
