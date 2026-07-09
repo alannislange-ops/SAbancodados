@@ -959,7 +959,6 @@ INSERT INTO PAGAMENTO (id_pagamento, forma_pagamento, status_pagamento, valor_pa
 (99, 'Boleto Bancário', 'Pago', 620.00, 99),
 (100, 'Faturado 30/60 dias', 'Pago', 4500.00, 100);
 
-
 SELECT * FROM CATEGORIA;
 SELECT * FROM FORNECEDOR;
 SELECT * FROM PRODUTO;
