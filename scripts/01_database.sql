@@ -1,0 +1,3 @@
+USE WeganosDB;
+DROP DATABASE WeganosDB;
+CREATE DATABASE WeganosDB;
