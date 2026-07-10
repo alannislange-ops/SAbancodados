@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Console;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,8 +42,11 @@ public class Main {
 
         System.out.print("Nome: ");
         Vlogin.setNome_login(teclado.nextLine());
+
         System.out.print("Senha: ");
-        Vlogin.setSenha_login(teclado.nextLine());
+        Console console = System.console();
+        char[] senha = console.readPassword();
+        Vlogin.setSenha_login(new String(senha));
 
         LoginDAO VdaoLogin = new LoginDAO();
 
