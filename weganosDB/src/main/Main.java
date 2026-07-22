@@ -1,13 +1,11 @@
-package model;
-
+import java.io.Console;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import conexao.Conexao;
-
+import model.*;
 import dao.*;
 
 public class Main {
@@ -43,8 +41,11 @@ public class Main {
 
         System.out.print("Nome: ");
         Vlogin.setNome_login(teclado.nextLine());
+
         System.out.print("Senha: ");
-        Vlogin.setSenha_login(teclado.nextLine());
+        Console console = System.console();
+        char[] senha = console.readPassword();
+        Vlogin.setSenha_login(new String(senha));
 
         LoginDAO VdaoLogin = new LoginDAO();
 
@@ -279,7 +280,6 @@ public class Main {
                     }
                     break;
                 case 3:
-
                     System.out.println("\n=============================================");
                     System.out.println("                  FORNECEDOR                 ");
                     System.out.println("=============================================");
@@ -304,19 +304,64 @@ public class Main {
                             System.out.print("Telefone: ");
                             fornecedor.setTelefoneFornecedor(teclado.nextLine());
 
-                            FornecedorDAO Cforrnecedor = new FornecedorDAO();
-                            Cforrnecedor.salvar(fornecedor);
-                            listaFornecedores.add(fornecedor);
+                            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+                            fornecedorDAO.salvar(fornecedor);
 
-                            System.out.println("Sucesso: Fornecedor adicionado a lista.");
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 2:
+                            System.out.println("\n--- [ LISTA DE FORNECEDORES ] ---");
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
+                            if (listaFornecedores.isEmpty()) {
+                                System.out.println("Nenhum fornecedor cadastrado.");
+                            } else {
+                                for (Fornecedor f : listaFornecedores) {
+                                    f.mostrarFornecedor();
+                                }
+                            }
                             break;
+
                         case 3:
+                            System.out.println("\n--- [ ALTERAR FORNECEDOR ] ---");
+
+                            Fornecedor fornAlterar = new Fornecedor();
+
+                            System.out.print("Digite o ID do fornecedor que deseja alterar: ");
+                            fornAlterar.setIdFornecedor(lerNumeroInteiro(teclado));
+                            System.out.print("Novo Nome da Empresa: ");
+                            fornAlterar.setNomeFornecedor(teclado.nextLine());
+                            System.out.print("Novo CNPJ: ");
+                            fornAlterar.setCnpjFornecedor(teclado.nextLine());
+                            System.out.print("Novo Telefone: ");
+                            fornAlterar.setTelefoneFornecedor(teclado.nextLine());
+
+                            FornecedorDAO daoFornAlterar = new FornecedorDAO();
+                            daoFornAlterar.alterar(fornAlterar);
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 4:
+                            System.out.println("\n--- [ DELETAR FORNECEDOR ] ---");
+
+                            Fornecedor fornDeletar = new Fornecedor();
+
+                            System.out.print("Digite o ID do fornecedor que deseja EXCLUIR: ");
+                            fornDeletar.setIdFornecedor(lerNumeroInteiro(teclado));
+
+                            FornecedorDAO daoFornDeletar = new FornecedorDAO();
+                            daoFornDeletar.deletar(fornDeletar);
+
+                            listaFornecedores = FornecedorDAO.listarTodos();
                             break;
+
                         case 0:
+                            break;
+
+                        default:
+                            System.out.println("Aviso: Opção incorreta. Escolha um número listado.");
                             break;
                     }
                     break;
@@ -355,7 +400,7 @@ public class Main {
                             for (Categoria c : listaCategorias) {
                                 c.mostrarCategoria();
                             }
-                        
+
                             break;
                         case 3:
                             System.out.println("\n--- [ ALTERAR CATEGORIA ] ---");
@@ -427,14 +472,14 @@ public class Main {
                             produto.setValorVendaProduto(lerPreco(teclado));
 
                             System.out.print("ID do Fornecedor vinculado: ");
-                            int idFornecedor = lerNumeroInteiro(teclado); 
+                            int idFornecedor = lerNumeroInteiro(teclado);
                             Fornecedor fornecedor = new Fornecedor();
-                            fornecedor.setIdFornecedor(idFornecedor); 
+                            fornecedor.setIdFornecedor(idFornecedor);
                             produto.setFkFornecedorIdFornecedor(fornecedor);
 
                             System.out.print("ID da Categoria vinculada: ");
-                            int idCategoria = lerNumeroInteiro(teclado); 
-                            categoria.setIdCategoria(idCategoria); 
+                            int idCategoria = lerNumeroInteiro(teclado);
+                            categoria.setIdCategoria(idCategoria);
                             produto.setFkCategoriaIdCategoria(categoria);
 
                             ProdutoDAO produtodao = new ProdutoDAO();
@@ -464,22 +509,22 @@ public class Main {
                             System.out.print("Novo Preço: ");
                             produtoAlterar.setPrecoProduto(teclado.nextBigDecimal());
 
-                            CategoriaDAO daoAlterar = new CategoriaDAO();
+                            ProdutoDAO daoAlterar = new ProdutoDAO();
 
-                            // daoAlterar.alterar(produtoAlterar);
-                            listaCategorias = CategoriaDAO.listarTodos();
+                            daoAlterar.alterar(produtoAlterar);
+                            listaProdutos = ProdutoDAO.listarTodos();
 
                             break;
                         case 4:
-                            System.out.println("\n--- [ DELETAR CATEGORIA ] ---");
+                            System.out.println("\n--- [ DELETAR PRODUTO ] ---");
 
-                            Categoria categoriaDeletar = new Categoria();
+                            Produto produtoDeletar = new Produto();
 
-                            System.out.print("Digite o ID da Categoria que deseja EXCLUIR: ");
-                            categoriaDeletar.setIdCategoria(lerNumeroInteiro(teclado));
+                            System.out.print("Digite o ID do produto que deseja EXCLUIR: ");
+                            produtoDeletar.setIdProduto(lerNumeroInteiro(teclado));
 
-                            CategoriaDAO cDeletar = new CategoriaDAO();
-                            cDeletar.deletar(categoriaDeletar);
+                            ProdutoDAO pDeletar = new ProdutoDAO();
+                            pDeletar.deletar(produtoDeletar);
 
                             break;
                         case 0:
@@ -487,8 +532,7 @@ public class Main {
                     }
                     break;
                 case 6:
-
-                    System.out.println("\n=============================================");
+                    System.out.println("=============================================");
                     System.out.println("                    PEDIDO                   ");
                     System.out.println("=============================================");
                     System.out.println("1 -> Create pedido");
@@ -516,20 +560,22 @@ public class Main {
                             pedido.setFkTransportadoraIdTransportadora(transp);
 
                             PedidoDAO dao = new PedidoDAO();
-
-                            
+                            dao.salvar(pedido);
                             listaPedidos.add(pedido);
                             System.out.println("Sucesso: Pedido adicionado a lista.");
                             break;
                         case 2:
                             System.out.println("\n--- [ LISTA DE PEDIDOS ] ---");
 
-                            listaPedidos = dao.listarTodos();
+                            System.out.println("\n--- [ LISTA DE PEDIDOS ] ---");
 
-                            for(Pedido p : listaPedidos){
+                            listaPedidos = PedidoDAO.listarTodos();
+
+                            for (Pedido p : listaPedidos) {
                                 p.mostrarCarrinho();
                             }
                             break;
+
                         case 3:
                             System.out.println("\n--- [ ALTERAR PEDIDO ] ---");
                             Pedido pedido2 = new Pedido();
@@ -544,8 +590,8 @@ public class Main {
                             pedido2.setFkTransportadoraIdTransportadora(teclado.nextLine());
 
                             PedidoDAO newDao = new PedidoDAO();
-                            
-                            dao.alterar(pedido2);
+
+                            newDao.alterar(pedido2);
                             break;
                         case 4:
                             System.out.println("\n--- [ DELETAR PEDIDO ] ---");
@@ -565,9 +611,7 @@ public class Main {
                             break;
                     }
                     break;
-
                 case 7:
-
                     System.out.println("\n=============================================");
                     System.out.println("                    COMPRA                   ");
                     System.out.println("=============================================");
@@ -587,10 +631,11 @@ public class Main {
                             System.out.print("ID do Pedido: ");
                             Pedido p = new Pedido();
                             p.setIdPedido(lerNumeroInteiro(teclado));
-                            carrinho.setFkPedidoIdPedido(p);;
+                            carrinho.setFkPedidoIdPedido(p);
+                            ;
                             System.out.print("ID do Produto: ");
                             Produto produto = new Produto();
-                            
+
                             carrinho.setFkProdutoIdProduto(produto);
                             System.out.print("Quantidade de itens: ");
                             carrinho.quantidadeProdutosCo = lerNumeroInteiro(teclado);
@@ -598,16 +643,16 @@ public class Main {
                             carrinho.valorCompra = lerPreco(teclado);
 
                             CarrinhoContemDAO dao = new CarrinhoContemDAO();
-
+                            dao.salvar(carrinho);
                             listaCarrinhos.add(carrinho);
                             System.out.println("Sucesso: Item associado ao carrinho.");
                             break;
                         case 2:
                             System.out.println("\n--- [ LISTA DE COMPRAS ] ---");
 
-                            listaCarrinhos = dao.listar();
+                            listaCarrinhos = CarrinhoContemDAO.listarTodos();
 
-                            for(CarrinhoContem c : listaCarrinhos){
+                            for (CarrinhoContem c : listaCarrinhos) {
                                 c.mostrarCarrinho();
                             }
 
@@ -627,7 +672,7 @@ public class Main {
 
                             CarrinhoContemDAO newDao = new CarrinhoContemDAO();
 
-                            dao.alterar(carrinho2);
+                            newDao.alterar(carrinho2);
                             break;
                         case 4:
                             System.out.println("\n--- [ DELETAR CARRINHO ] ---");
@@ -635,8 +680,6 @@ public class Main {
 
                             System.out.println("Digite o id do");
                             carrinhoDel.setFkPedidoIdPedido(teclado.nextLine());
-
-
 
                             CarrinhoContemDAO pDeletar = new CarrinhoContemDAO();
                             pDeletar.deletar(carrinhoDel);
@@ -650,7 +693,6 @@ public class Main {
                     break;
 
                 case 8:
-
                     System.out.println("\n=============================================");
                     System.out.println("                  PAGAMENTO                  ");
                     System.out.println("=============================================");
@@ -664,32 +706,79 @@ public class Main {
 
                     switch (opcao2) {
                         case 1:
-                            System.out.println("\n--- [ REGISTRAR PAGAMENTO ] ---");
+                            System.out.println("\n--- [ NOVO PAGAMENTO ] ---");
 
                             Pagamento pagamento = new Pagamento();
 
-                            System.out.print("Forma de Pagamento: ");
+                            System.out.print("Forma de Pagamento (Ex: Cartão, Pix, Boleto): ");
                             pagamento.setFormaPagamento(teclado.nextLine());
-                            System.out.print("Status do Pagamento: ");
+                            System.out.print("Status do Pagamento (Ex: Pago, Pendente): ");
                             pagamento.setStatusPagamento(teclado.nextLine());
-                            System.out.print("Valor Pago: R$ ");
-                            pagamento.setValorPagamento(lerPreco(teclado));
-                            System.out.print("ID do Pedido: ");
+                            System.out.print("Valor do Pagamento (Use ponto para centavos, ex: 150.50): ");
+                            pagamento.setValorPagamento(new java.math.BigDecimal(teclado.nextLine()));
+                            System.out.print("ID do Pedido Relacionado: ");
                             pagamento.setFkPedidoIdPedido(lerNumeroInteiro(teclado));
 
-                            PagamentosDAO Cpagamento = new PagamentosDAO();
-                            Cpagamento.salvar(pagamento);
-                            listaPagamentos.add(pagamento);
+                            PagamentosDAO pagamentosDAO = new PagamentosDAO();
+                            pagamentosDAO.salvar(pagamento);
 
-                            System.out.println("Sucesso: Pagamento adicionado a lista.");
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 2:
+                            System.out.println("\n--- [ LISTA DE PAGAMENTOS ] ---");
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
+                            if (listaPagamentos.isEmpty()) {
+                                System.out.println("Nenhum pagamento cadastrado.");
+                            } else {
+                                for (Pagamento p : listaPagamentos) {
+                                    p.mostrarPagamento();
+                                }
+                            }
                             break;
+
                         case 3:
+                            System.out.println("\n--- [ ALTERAR PAGAMENTO ] ---");
+
+                            Pagamento pagAlterar = new Pagamento();
+
+                            System.out.print("Digite o ID do pagamento que deseja alterar: ");
+                            pagAlterar.setIdPagamento(lerNumeroInteiro(teclado));
+                            System.out.print("Nova Forma de Pagamento: ");
+                            pagAlterar.setFormaPagamento(teclado.nextLine());
+                            System.out.print("Novo Status do Pagamento: ");
+                            pagAlterar.setStatusPagamento(teclado.nextLine());
+                            System.out.print("Novo Valor do Pagamento (Ex: 250.00): ");
+                            pagAlterar.setValorPagamento(new java.math.BigDecimal(teclado.nextLine()));
+                            System.out.print("Novo ID do Pedido Relacionado: ");
+                            pagAlterar.setFkPedidoIdPedido(lerNumeroInteiro(teclado));
+
+                            PagamentosDAO daoPagAlterar = new PagamentosDAO();
+                            daoPagAlterar.alterar(pagAlterar);
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 4:
+                            System.out.println("\n--- [ DELETAR PAGAMENTO ] ---");
+
+                            Pagamento pagDeletar = new Pagamento();
+
+                            System.out.print("Digite o ID do pagamento que deseja EXCLUIR: ");
+                            pagDeletar.setIdPagamento(lerNumeroInteiro(teclado));
+
+                            PagamentosDAO daoPagDeletar = new PagamentosDAO();
+                            daoPagDeletar.deletar(pagDeletar);
+
+                            listaPagamentos = PagamentosDAO.listarTodos();
                             break;
+
                         case 0:
+                            break;
+
+                        default:
+                            System.out.println("Aviso: Opção incorreta. Escolha um número listado.");
                             break;
                     }
                     break;
@@ -708,8 +797,9 @@ public class Main {
 
                     switch (opcao2) {
                         case 1:
-                            System.out.println("\n--- [ NOVA AVALIACAO ] ---");
+                            System.out.println("\n--- [ NOVA AVALIAÇÃO ] ---");
 
+                            Produto produto = new Produto();
                             Avaliacao avaliacao = new Avaliacao();
 
                             System.out.print("Nota da Avaliacao (1 a 5): ");
@@ -717,18 +807,55 @@ public class Main {
                             System.out.print("Texto da Avaliacao: ");
                             avaliacao.setDescAvaliacao(teclado.nextLine());
                             System.out.print("ID do Produto: ");
-                            //avaliacao.setFkProdutoIdProduto(lerNumeroInteiro(teclado));
 
-                            AvaliacaoDAO Cavalia = new AvaliacaoDAO();
-                            Cavalia.salvar(avaliacao);
+                            produto.setIdProduto(lerNumeroInteiro(teclado));
+                            avaliacao.setFkProdutoIdProduto(produto);
+
+                            AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+                            avaliacaoDAO.salvar(avaliacao);
                             listaAvaliacoes.add(avaliacao);
                             System.out.println("Sucesso: Avaliacao adicionada a lista.");
                             break;
                         case 2:
+                            System.out.println("\n--- [ LISTA DE AVALIAÇÃO ] ---");
+
+                            listaAvaliacoes = AvaliacaoDAO.listarTodos();
+                            for (Avaliacao a : listaAvaliacoes) {
+                                a.mostrarAvaliacao();
+                            }
                             break;
                         case 3:
+                            System.out.println("\n--- [ ALTERAR AVALIAÇÃO ] ---");
+
+                            Avaliacao avaliacaoAlterar = new Avaliacao();
+                            Produto produtoAlterar = new Produto();
+
+                            System.out.print("Digite o ID da avaliacao que deseja alterar: ");
+                            avaliacaoAlterar.setIdAvaliacao(teclado.nextInt());
+                            System.out.print("Nova Nota: ");
+                            avaliacaoAlterar.setNotaAvaliacao(teclado.nextInt());
+                            teclado.nextLine();
+                            System.out.println("Nova Descricao: ");
+                            avaliacaoAlterar.setDescAvaliacao(teclado.nextLine());
+                            System.out.print("Novo ID do produto: ");
+                            produtoAlterar.setIdProduto(teclado.nextInt());
+                            avaliacaoAlterar.setFkProdutoIdProduto(produtoAlterar);
+
+                            AvaliacaoDAO daoAlterar = new AvaliacaoDAO();
+
+                            daoAlterar.alterar(avaliacaoAlterar);
+                            listaAvaliacoes = AvaliacaoDAO.listarTodos();
                             break;
                         case 4:
+                            System.out.println("\n--- [ DELETAR AVALIAÇÃO ] ---");
+
+                            Avaliacao avaliacaoDeletar = new Avaliacao();
+
+                            System.out.print("Digite o ID da avaliacao que deseja EXCLUIR: ");
+                            avaliacaoDeletar.setIdAvaliacao(lerNumeroInteiro(teclado));
+
+                            AvaliacaoDAO aDeletar = new AvaliacaoDAO();
+                            aDeletar.deletar(avaliacaoDeletar);
                             break;
                         case 0:
                             break;
@@ -818,8 +945,9 @@ public class Main {
 
                     opcao2 = lerNumeroInteiro(teclado);
 
-                    switch(opcao2) {
-                        case 1:System.out.println("\n=============================================");
+                    switch (opcao2) {
+                        case 1:
+                            System.out.println("\n=============================================");
                             System.out.println("         SUBMENU DE VIEWS/RELATÓRIOS         ");
                             System.out.println("=============================================");
                             System.out.println("1 -> Listar as transportadoras mais acessíveis");
@@ -835,20 +963,85 @@ public class Main {
                             System.out.println("11 -> Mostrar a cidade que mais utiliza o serviço");
                             System.out.println("12 -> Listar os produtos mais solicitados no último mês");
                             System.out.println("13 -> Listar a quantidade de produtos fornecidos por fornecedor");
-                            System.out.println("14 -> Listar produtos e seus respectivos fornecedores com estoque baixo");
+                            System.out
+                                    .println("14 -> Listar produtos e seus respectivos fornecedores com estoque baixo");
                             System.out.println("15 -> Mostrar o total recebido com as vendas no ano de 2026");
                             System.out.println("16 -> Listar os maiores valores de venda dos produtos");
                             System.out.println("17 -> Listar as avaliações relacionadas a transportadora");
-                            System.out.println("18 -> Mostrar o faturamento, custo e lucro por produto vendido");
-                            System.out.println("19 -> Mostrar o total lucrado pelo serviço de ecommerce ");
+                            System.out.println("18 -> Mostrar o total lucrado pelo serviço de ecommerce ");
+                            System.out.println("19 -> Mostrar o faturamento, custo e lucro por produto vendido");
                             System.out.println("20 -> Listar os pagamentos não realizados");
+                            System.out.println("0 -> Sair do submenu de relatórios");
                             System.out.print("Escolha uma opcao: ");
 
                             int opcaoView = lerNumeroInteiro(teclado);
 
                             RelatorioDAO daorelatorio = new RelatorioDAO();
-
-                            daorelatorio.transportadorasMaisAcessiveis();
+                            switch (opcaoView) {
+                                case 1:
+                                    daorelatorio.transportadorasMaisAcessiveis();
+                                    break;
+                                case 2:
+                                    daorelatorio.pioresAvaliacoes();
+                                    break;
+                                case 3:
+                                    daorelatorio.produtosMaisSolicitados();
+                                    break;
+                                case 4:
+                                    daorelatorio.produtosMenosSolicitados();
+                                    break;
+                                case 5:
+                                    daorelatorio.melhoresProdutosAvaliados();
+                                    break;
+                                case 6:
+                                    daorelatorio.produtosMenorEstoque();
+                                    break;
+                                case 7:
+                                    daorelatorio.metodosPagamentoUtilizados();
+                                    break;
+                                case 8:
+                                    daorelatorio.comprasMaisCaras();
+                                    break;
+                                case 9:
+                                    daorelatorio.categoriasMaisVendidas();
+                                    break;
+                                case 10:
+                                    daorelatorio.quantidadeEstoqueProdutos();
+                                    break;
+                                case 11:
+                                    daorelatorio.cidadeMaisUtilizadora();
+                                    break;
+                                case 12:
+                                    daorelatorio.produtoMaisSolicitadoUltimoMes();
+                                    break;
+                                case 13:
+                                    daorelatorio.produtosFornecidosQuantidades();
+                                    break;
+                                case 14:
+                                    daorelatorio.produtosFornecedoresMenorEstoque();
+                                    break;
+                                case 15:
+                                    daorelatorio.valorTotal2026();
+                                    break;
+                                case 16:
+                                    daorelatorio.precoVendaMaisCaros();
+                                    break;
+                                case 17:
+                                    daorelatorio.avaliacoesTransportadora();
+                                    break;
+                                case 18:
+                                    daorelatorio.totalLucrado();
+                                    break;
+                                case 19:
+                                    daorelatorio.faturamentoLucroCustoProdutos();
+                                    break;
+                                case 20:
+                                    daorelatorio.pagamentosNaoRealizados();
+                                    break;
+                                default:
+                                    System.out.println(opcaoView != 0 ? "ID Inválido. Tente novamente." : "");
+                                    break;
+                            }
                             break;
                         case 2:
                             System.out.println("\n--- [ LISTAGEM DE DADOS ARMAZENADOS ] ---");
@@ -859,21 +1052,24 @@ public class Main {
                             System.out.println("Total de Transportadoras: " + listaTransportadoras.size());
                             for (Transportadora t : listaTransportadoras) {
                                 System.out
-                                        .println(" - ID: " + t.getIdTransportadora() + " | Nome: " + t.getNomeTransportadora());
+                                        .println(" - ID: " + t.getIdTransportadora() + " | Nome: "
+                                                + t.getNomeTransportadora());
                             }
                             System.out.println("Total de Fornecedores: " + listaFornecedores.size());
                             System.out.println("Total de Categorias: " + listaCategorias.size());
                             System.out.println("Total de Produtos: " + listaProdutos.size());
                             for (Produto p : listaProdutos) {
-                                System.out.println(" - ID: " + p.getIdProduto() + " | Nome: " + p.getNomeProduto() + " | Estoque: "
-                                        + p.getQtdEstoqueProduto());
+                                System.out.println(
+                                        " - ID: " + p.getIdProduto() + " | Nome: " + p.getNomeProduto() + " | Estoque: "
+                                                + p.getQtdEstoqueProduto());
                             }
                             System.out.println("Total de Pedidos: " + listaPedidos.size());
                             System.out.println("Total de Itens de Carrinho: " + listaCarrinhos.size());
                             System.out.println("Total de Pagamentos: " + listaPagamentos.size());
                             System.out.println("Total de Avaliacoes: " + listaAvaliacoes.size());
-                        break;
+                            break;
                     }
+                    break;
                 case 0:
                     System.out.println("\nFinalizando o programa.");
                     rodando = false;

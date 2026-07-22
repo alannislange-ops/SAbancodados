@@ -39,11 +39,8 @@ public class CarrinhoContemDAO {
     }
 
 
-<<<<<<< HEAD
-    public static ArrayList<CarrinhoContem> listar() {
-=======
+
     public static ArrayList<CarrinhoContem> listarTodos() {
->>>>>>> 476c4cd589f7e98a3dafe1f6338b58946127aa1e
         String sql = "SELECT * FROM CARRINHO_CONTEM";
         ArrayList<CarrinhoContem> lista = new ArrayList<>();
 
@@ -116,6 +113,3 @@ public class CarrinhoContemDAO {
         }
     }
 }
-
-
-

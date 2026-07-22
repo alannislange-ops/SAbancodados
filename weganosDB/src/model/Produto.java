@@ -17,7 +17,7 @@ public class Produto {
 
     public void mostrarProduto(){
          System.out.println("=======================================");
-        System.out.println("ID: "+idProduto + "\nNome: "+nomeProduto+ "\nPreço: "+precoProduto+"\nQuantidade Estoque: "+qtdEstoqueProduto+"\nDescrição: "+descProduto+"\nValor Compra: "+valorCompraProduto+"\nValor Venda: "+valorVendaProduto+"\nID Fornecedor: "+fkFornecedorIdFornecedor+"\nID Categoria: "+fkCategoriaIdCategoria);
+        System.out.println("ID: "+idProduto + "\nNome: "+nomeProduto+ "\nPreço: "+precoProduto+"\nQuantidade Estoque: "+qtdEstoqueProduto+"\nDescrição: "+descProduto+"\nValor Compra: "+valorCompraProduto+"\nValor Venda: "+valorVendaProduto+"\nID Fornecedor: "+getFkFornecedorIdFornecedor().getIdFornecedor()+"\nID Categoria: "+getFkCategoriaIdCategoria().getIdCategoria());
         System.out.println("=======================================");
     }
     public int getIdProduto() {

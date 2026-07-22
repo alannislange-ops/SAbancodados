@@ -6,6 +6,11 @@ public class Avaliacao {
     private Produto fkProdutoIdProduto;
 
 
+    public void mostrarAvaliacao(){
+        System.out.println("=======================================");
+        System.out.println("ID: "+idAvaliacao + "\nNota: "+notaAvaliacao+ "\nDescrição: "+descAvaliacao+"\nId do Produto: "+getFkProdutoIdProduto().getIdProduto());
+        System.out.println("=======================================");
+    }
     public Avaliacao() {
     }
 
