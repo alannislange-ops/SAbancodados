@@ -8,16 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import dao.*;
-import model.Avaliacao;
-import model.CarrinhoContem;
-import model.Categoria;
-import model.Cliente;
-import model.Fornecedor;
-import model.Login;
-import model.Pagamento;
-import model.Pedido;
-import model.Produto;
-import model.Transportadora;
+import model.*;
 
 public class Main {
     public static void main(String[] args) {
