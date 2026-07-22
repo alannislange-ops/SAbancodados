@@ -845,7 +845,7 @@ public class Main {
                             AvaliacaoDAO daoAlterar = new AvaliacaoDAO();
 
                             daoAlterar.alterar(avaliacaoAlterar);
-                            listaAvaliacoes = daoAlterar.listarTodos();
+                            listaAvaliacoes = AvaliacaoDAO.listarTodos();
                             break;
                         case 4:
                             System.out.println("\n--- [ DELETAR AVALIAÇÃO ] ---");
