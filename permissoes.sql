@@ -8,10 +8,10 @@ RENAME USER 'marcos' TO 'marcos_deleprani';
 CREATE USER 'pedro_h_s_schneider' IDENTIFIED BY 'senha1234';
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON WeganosDB.* TO'joas_schmidt';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER ON WeganosDB.* TO'andre_a_silva';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER ON WeganosDB.* TO'alannis_b_lange';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER ON WeganosDB.* TO'marcos_deleprani';
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER ON WeganosDB.* TO'pedro_h_s_schneider';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CREATE VIEW, SHOW VIEW, INDEX ON WeganosDB.* TO'andre_a_silva';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, TRIGGER, LOCK TABLES,CREATE VIEW, SHOW VIEW, INDEX ON WeganosDB.* TO'alannis_b_lange';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CREATE VIEW, SHOW VIEW, INDEX ON WeganosDB.* TO'marcos_deleprani';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, CREATE VIEW, SHOW VIEW, INDEX ON WeganosDB.* TO'pedro_h_s_schneider';
 SELECT Host, Db, User, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv
 FROM mysql.db 
 WHERE Db = 'WeganosDB';
