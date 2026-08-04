@@ -24,10 +24,13 @@ GROUP BY nome_produto
 ORDER BY quantidade_produtos ASC;
 
 -- Ver os produtos mais bem avaliados.
-SELECT DISTINCT p.nome_produto 
-FROM produto AS p
-JOIN avaliacao AS a on p.id_produto = a.fk_produto_id_produto
-WHERE a.nota_avaliacao > 3;
+SELECT DISTINCT ON (p.nome_produto) 
+    p.nome_produto, 
+    a.nota_avaliacao
+FROM PRODUTO AS p
+JOIN AVALIACAO AS a ON p.id_produto = a.FK_PRODUTO_id_produto
+WHERE a.nota_avaliacao > 3
+ORDER BY p.nome_produto ASC, a.nota_avaliacao DESC;
 
 -- Ver os produtos com a menor quantidade no estoque, indicando uma reposição necessária.
 SELECT p.nome_produto, p.qtd_estoque_produto
